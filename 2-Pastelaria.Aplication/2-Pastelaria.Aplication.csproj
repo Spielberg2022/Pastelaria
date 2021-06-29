@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>_2_Pastelaria.Aplication</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\3-Pastelaria.Domain\3-Pastelaria.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
