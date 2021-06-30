@@ -10,7 +10,7 @@ namespace _2_Pastelaria.Aplication
         {
 
         }
-        public bool Enviar(string email, string mensagem)
+        public bool Enviar()
         {
             return true;
         }
