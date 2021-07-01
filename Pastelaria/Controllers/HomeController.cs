@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _3_Pastelaria.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,7 @@ namespace Pastelaria.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly UsuarioDto usuario = new UsuarioDto();
         public ActionResult Index()
         {
             return View();

@@ -6,7 +6,7 @@ namespace _3_Pastelaria.Domain.DisparoEmail.Dto
 {
     class DisparoEmailDto
     {
-        public int Id { get; set; }
+        public int Id { get; }
         public int IdTarefa { get; set; }
         public int IdUsuarioDestinatario { get; set; }
         public int CodigoTipoEmail { get; set; }

@@ -4,9 +4,9 @@ using System.Text;
 
 namespace _3_Pastelaria.Domain.TipoUsuario.Dto
 {
-    class TipoUsuarioDto
+    public class TipoUsuarioDto
     {
-        public int Codigo { get; set; }
+        public int Codigo { get; }
         public string Descricao { get; set; }
     }
 }

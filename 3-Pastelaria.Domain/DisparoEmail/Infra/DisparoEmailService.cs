@@ -8,12 +8,12 @@ using System.Text;
 
 namespace _3_Pastelaria.Domain.DisparoEmail
 {
-    class DisparoEmail
+    class DisparoEmailService
     {
         private DisparoEmailDto _email;
         private UsuarioDto _usuario;
 
-        public DisparoEmail(DisparoEmailDto email, UsuarioDto usuario)
+        public DisparoEmailService(DisparoEmailDto email, UsuarioDto usuario)
         {
             _email = email;
             _usuario = usuario;

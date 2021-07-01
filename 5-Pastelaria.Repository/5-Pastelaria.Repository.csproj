@@ -10,4 +10,8 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\3-Pastelaria.Domain\3-Pastelaria.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
