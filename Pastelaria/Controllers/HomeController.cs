@@ -29,12 +29,5 @@ namespace Pastelaria.Controllers
             return View();
         }
 
-        public ActionResult CadastroUsuario()
-        {
-            ViewBag.Message = "Sua página de Cadastro";
-
-            return View();
-        }
-
     }
 }
