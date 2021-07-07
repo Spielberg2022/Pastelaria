@@ -5,13 +5,15 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1-Pastelaria.Presentation", "Pastelaria\1-Pastelaria.Presentation.csproj", "{73C9F7A6-5E6D-4156-8D2E-733D9B0567BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2-Pastelaria.Aplication", "2-Pastelaria.Aplication\2-Pastelaria.Aplication.csproj", "{0CF6C937-101F-4A17-B109-D727190DFB8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2-Pastelaria.Aplication", "2-Pastelaria.Aplication\2-Pastelaria.Aplication.csproj", "{0CF6C937-101F-4A17-B109-D727190DFB8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3-Pastelaria.Domain", "3-Pastelaria.Domain\3-Pastelaria.Domain.csproj", "{C9FC1945-D9B7-40DF-BE56-94CDB3705DF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3-Pastelaria.Domain", "3-Pastelaria.Domain\3-Pastelaria.Domain.csproj", "{C9FC1945-D9B7-40DF-BE56-94CDB3705DF6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4-Pastelaria.Api", "4-Pastelaria.Api\4-Pastelaria.Api.csproj", "{3B4528B8-6DFE-469F-ACC5-AEEBF1654DF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5-Pastelaria.Repository", "5-Pastelaria.Repository\5-Pastelaria.Repository.csproj", "{EDEED78B-E1B8-43BD-A5E8-05DB27F17EFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "5-Pastelaria.Repository", "5-Pastelaria.Repository\5-Pastelaria.Repository.csproj", "{EDEED78B-E1B8-43BD-A5E8-05DB27F17EFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pastelaria.Domain", "Pastelaria.Domain\Pastelaria.Domain.csproj", "{3D3C752F-F735-4B6E-BF95-C173E8EFB600}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{EDEED78B-E1B8-43BD-A5E8-05DB27F17EFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDEED78B-E1B8-43BD-A5E8-05DB27F17EFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDEED78B-E1B8-43BD-A5E8-05DB27F17EFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D3C752F-F735-4B6E-BF95-C173E8EFB600}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D3C752F-F735-4B6E-BF95-C173E8EFB600}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D3C752F-F735-4B6E-BF95-C173E8EFB600}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D3C752F-F735-4B6E-BF95-C173E8EFB600}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
