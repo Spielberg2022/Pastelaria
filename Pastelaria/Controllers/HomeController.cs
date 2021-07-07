@@ -1,4 +1,4 @@
-﻿using _3_Pastelaria.Domain;
+﻿using Pastelaria.Domain.Usuario.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,5 +28,13 @@ namespace Pastelaria.Controllers
 
             return View();
         }
+
+        public ActionResult CadastroUsuario()
+        {
+            ViewBag.Message = "Sua página de Cadastro";
+
+            return View();
+        }
+
     }
 }
