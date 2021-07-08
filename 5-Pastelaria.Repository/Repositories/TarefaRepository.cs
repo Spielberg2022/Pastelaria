@@ -20,7 +20,8 @@ namespace _5_Pastelaria.Repository.Repositories
         private enum Procedures
         {
             PSP_InsTarefa,
-            PSP_SelTarefaPorUsuario
+            PSP_SelTarefaPorUsuario,
+            PSP_SelTarefaPorId
         }
 
         public void Post(TarefaDto tarefa)
@@ -46,6 +47,29 @@ namespace _5_Pastelaria.Repository.Repositories
                     return new TarefaDto
                     {
 
+                    };
+                }
+            }
+            return null;
+        }
+
+        public TarefaDto GetTarefaPorId(int id)
+        {
+            conexao.ExecuteProcedure(Procedures.PSP_SelTarefaPorUsuario);
+            conexao.AddParameter("@Id", id);
+            using (var r = conexao.ExecuteReader())
+            {
+                if (r.Read())
+                {
+                    return new TarefaDto
+                    {
+                        Id = int.Parse(r["Id"].ToString()),
+                        IdGestor = int.Parse(r["IdGestor"].ToString()),
+                        IdUsuario = int.Parse(r["IdUsuario"].ToString()),
+                        TarefaDescricao = r["TarefaDescricao"].ToString(),
+                        DataAgendamento = DateTime.Parse(r["DataAgendamento"].ToString()),
+                        DataLimiteExecucao = DateTime.Parse(r["DataLimiteExecucao"].ToString()),
+                        DataExecucao = DateTime.Parse(r["DataExecucao"].ToString())
                     };
                 }
             }
