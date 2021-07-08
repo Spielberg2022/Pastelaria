@@ -54,6 +54,7 @@
     <Compile Include="TipoEmail\Dto\TipoEmail.cs" />
     <Compile Include="TipoUsuario\Dto\TipoUsuarioDto.cs" />
     <Compile Include="Usuario\Dto\UsuarioDto.cs" />
+    <Compile Include="Usuario\Services\UsuarioService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

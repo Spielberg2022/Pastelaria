@@ -29,5 +29,25 @@ namespace Pastelaria.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult Login()
+        {
+            ViewBag.Message = "Entre no sistema:";
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Principal(UsuarioDto usuario)
+        {
+            if(true)
+            {
+                return View("Principal");
+            }
+            else
+            {
+                return View("Login");
+            }
+        }
     }
 }
