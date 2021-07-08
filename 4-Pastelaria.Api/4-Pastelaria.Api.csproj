@@ -106,8 +106,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\5-Pastelaria.Repository\5-Pastelaria.Repository.csproj">
-      <Project>{5338da27-73d1-4ae5-b10b-027ab42d7482}</Project>
+      <Project>{9a9c4b5b-7400-4496-a587-4a610eaa253b}</Project>
       <Name>5-Pastelaria.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\6-Pastelaria.Services\6-Pastelaria.Services.csproj">
+      <Project>{b31d980e-fd5a-423f-a8fa-01bc5e25a967}</Project>
+      <Name>6-Pastelaria.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pastelaria.Domain\Pastelaria.Domain.csproj">
       <Project>{3d3c752f-f735-4b6e-bf95-c173e8efb600}</Project>

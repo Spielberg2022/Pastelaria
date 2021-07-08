@@ -1,6 +1,6 @@
-﻿
-using _5_Pastelaria.Repository;
+﻿using _5_Pastelaria.Repository;
 using Pastelaria.Domain.Usuario.Dto;
+using Pastelaria.Domain.Usuario.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +14,12 @@ namespace _4_Pastelaria.Api.Controllers
     public class UsuarioController : ApiController
     {
         private readonly UsuarioRepository _usuarioRepository;
+        private readonly UsuarioService _usuarioService;
 
         public UsuarioController()
         {
             _usuarioRepository = new UsuarioRepository();
-
+            _usuarioService = new UsuarioService();
         }
 
         public IHttpActionResult GetLogin(string email, string senha)
@@ -30,7 +31,7 @@ namespace _4_Pastelaria.Api.Controllers
             }
             catch(Exception ex)
             {
-                return BadRequest("Falha o fazer login!");
+                return BadRequest("Falha ao fazer login!");
             }
         }
         
@@ -38,12 +39,16 @@ namespace _4_Pastelaria.Api.Controllers
         {
             try
             {
-                _usuarioRepository.Post(usuario);
+                var retorno = _usuarioService.Post(usuario);
+                if(!string.IsNullOrEmpty(retorno))
+                {
+                    return BadRequest(retorno);
+                }
                 return Ok(usuario);
             }
             catch (Exception ex)
             {
-                return BadRequest("Falha ao inserir usuário!");
+                return BadRequest(ex.Message);
             }
         }
     }

@@ -41,7 +41,19 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[PSP_InsUsu
 GO
 
 CREATE PROCEDURE [dbo].[PSP_InsUsuario]
-
+	@CodigoTipoUsuario tinyint,
+	@Email varchar(70),
+	@Senha varchar(30),
+	@Nome varchar(80),
+	@DataNascimento date = null,
+	@TelefoneFixo varchar(10) = null,
+	@TelefoneCelular varchar(11) = null,
+	@Logradouro varchar(80) = null,
+	@Bairro varchar(50) = null,
+	@Cidade varchar(50) = null,
+	@Uf varchar(2) = null,
+	@Cep varchar(8) = null,
+	@Foto varchar(30) = null
 	AS
 
 	/*
@@ -56,10 +68,44 @@ CREATE PROCEDURE [dbo].[PSP_InsUsuario]
 
 	BEGIN;
 
-		
-
-		
+		INSERT INTO Usuario (CodigoTipoUsuario, Email, Senha, Nome, DataNascimento, 
+							TelefoneFixo, TelefoneCelular, Logradouro, Bairro, Cidade, Uf, Cep, Foto)
+			VALUES (@CodigoTipoUsuario,@Email,@Senha,@Nome,@DataNascimento,
+					@TelefoneFixo,@TelefoneCelular,@Logradouro,@Bairro,@Cidade,@Uf,@Cep,@Foto)
 
 	END;
 GO
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[PSP_SelUsuarioPorEmail]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[PSP_SelUsuarioPorEmail]
+GO
+
+CREATE PROCEDURE [dbo].[PSP_SelUsuarioPorEmail]
+	@Email varchar(70)
+	AS
+
+	/*
+	Documentacao
+	Arquivo Fonte.....: Usuario.sql
+	Objetivo..........: Buscar um usuário na tabela pelo código informado
+	Autor.............: SMN - Wesley Silveira
+ 	Data..............: 08/07/2021
+	Ex................: EXEC [dbo].[PSP_SelUsuarioPorEmail]
+
+	*/
+
+	BEGIN;
+
+		-- nolock em todas tabelas da proc
+		SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+
+		SELECT  Id, CodigoTipoUsuario, Email, Senha, Nome, DataNascimento, 
+				TelefoneFixo, TelefoneCelular, Logradouro, Bairro, Cidade, Uf, Cep, Foto
+			FROM [dbo].[Usuario]
+			WHERE Email = @Email
+
+	END;
+GO
+				
 								

@@ -11,7 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pastelaria.Domain", "Pastel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4-Pastelaria.Api", "4-Pastelaria.Api\4-Pastelaria.Api.csproj", "{893C90E8-5496-46CE-9F17-2243A8AFFD62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5-Pastelaria.Repository", "5-Pastelaria.Repository\5-Pastelaria.Repository.csproj", "{5338DA27-73D1-4AE5-B10B-027AB42D7482}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5-Pastelaria.Repository", "5-Pastelaria.Repository\5-Pastelaria.Repository.csproj", "{9A9C4B5B-7400-4496-A587-4A610EAA253B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6-Pastelaria.Services", "6-Pastelaria.Services\6-Pastelaria.Services.csproj", "{B31D980E-FD5A-423F-A8FA-01BC5E25A967}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +37,14 @@ Global
 		{893C90E8-5496-46CE-9F17-2243A8AFFD62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{893C90E8-5496-46CE-9F17-2243A8AFFD62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{893C90E8-5496-46CE-9F17-2243A8AFFD62}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5338DA27-73D1-4AE5-B10B-027AB42D7482}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5338DA27-73D1-4AE5-B10B-027AB42D7482}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5338DA27-73D1-4AE5-B10B-027AB42D7482}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5338DA27-73D1-4AE5-B10B-027AB42D7482}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A9C4B5B-7400-4496-A587-4A610EAA253B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A9C4B5B-7400-4496-A587-4A610EAA253B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A9C4B5B-7400-4496-A587-4A610EAA253B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A9C4B5B-7400-4496-A587-4A610EAA253B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B31D980E-FD5A-423F-A8FA-01BC5E25A967}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B31D980E-FD5A-423F-A8FA-01BC5E25A967}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B31D980E-FD5A-423F-A8FA-01BC5E25A967}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B31D980E-FD5A-423F-A8FA-01BC5E25A967}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

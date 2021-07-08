@@ -18,7 +18,8 @@ namespace _5_Pastelaria.Repository
         private enum Procedures
         {
             PSP_SelUsuarioPorEmaileSenha,
-            PSP_InsUsuario
+            PSP_InsUsuario,
+            PSP_SelUsuarioPorEmail
         }
 
         public UsuarioDto GetLogin(string email, string senha)
@@ -57,6 +58,36 @@ namespace _5_Pastelaria.Repository
             conexao.AddParameter("@Cep", usuario.Cep);
             conexao.AddParameter("@Foto", usuario.Foto);
             conexao.ExecuteNonQuery();
+        }
+
+        public UsuarioDto GetUsuarioPorEmail(string Email)
+        {
+            conexao.ExecuteProcedure(Procedures.PSP_SelUsuarioPorEmail);
+            conexao.AddParameter("@Email", Email);
+            using (var r = conexao.ExecuteReader())
+            {
+                if (r.Read() )
+                {
+                    return new UsuarioDto
+                    {
+                        Id = int.Parse(r["Id"].ToString()),
+                        CodigoTipoUsuario = int.Parse(r["CodigoTipoUsuario"].ToString()),
+                        Email = r["Email"].ToString(),
+                        Senha = r["Senha"].ToString(),
+                        Nome = r["Nome"].ToString(),
+                        //DataNascimento = DateTime.Parse(r["DataNascimento"].ToString()),
+                        //Telefonefixo = r["TelefoneFixo"].ToString(),
+                        //TelefoneCelular = r["TelefoneCelular"].ToString(),
+                        //Logradouro = r["Logradouro"].ToString(),
+                        //Bairro = r["Bairro"].ToString(),
+                        //Cidade = r["Cidade"].ToString(),
+                        //Uf = r["Uf"].ToString(),
+                        //Cep = r["Cep"].ToString(),
+                        //Foto = r["Foto"].ToString()
+                    };
+                }
+            }
+            return null;
         }
     }
 }

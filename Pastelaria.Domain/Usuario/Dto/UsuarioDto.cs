@@ -34,7 +34,7 @@ namespace Pastelaria.Domain.Usuario.Dto
         [Display(Name = "Data de nascimento")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm}", ApplyFormatInEditMode = true)]
-        public DateTime DataNascimento { get; set; }
+        public DateTime? DataNascimento { get; set; }
 
         [Display(Name = "Telefone fixo")]
         public string Telefonefixo { get; set; }
