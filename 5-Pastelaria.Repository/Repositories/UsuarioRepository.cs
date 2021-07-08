@@ -75,15 +75,15 @@ namespace _5_Pastelaria.Repository
                         Email = r["Email"].ToString(),
                         Senha = r["Senha"].ToString(),
                         Nome = r["Nome"].ToString(),
-                        //DataNascimento = DateTime.Parse(r["DataNascimento"].ToString()),
-                        //Telefonefixo = r["TelefoneFixo"].ToString(),
-                        //TelefoneCelular = r["TelefoneCelular"].ToString(),
-                        //Logradouro = r["Logradouro"].ToString(),
-                        //Bairro = r["Bairro"].ToString(),
-                        //Cidade = r["Cidade"].ToString(),
-                        //Uf = r["Uf"].ToString(),
-                        //Cep = r["Cep"].ToString(),
-                        //Foto = r["Foto"].ToString()
+                        DataNascimento = DateTime.Parse(r["DataNascimento"].ToString()),
+                        Telefonefixo = r["TelefoneFixo"].ToString(),
+                        TelefoneCelular = r["TelefoneCelular"].ToString(),
+                        Logradouro = r["Logradouro"].ToString(),
+                        Bairro = r["Bairro"].ToString(),
+                        Cidade = r["Cidade"].ToString(),
+                        Uf = r["Uf"].ToString(),
+                        Cep = r["Cep"].ToString(),
+                        Foto = r["Foto"].ToString()
                     };
                 }
             }
