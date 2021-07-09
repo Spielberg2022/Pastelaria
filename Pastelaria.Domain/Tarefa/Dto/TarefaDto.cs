@@ -14,6 +14,6 @@ namespace Pastelaria.Domain.Tarefa.Dto
         public string TarefaDescricao { get; set; }
         public DateTime DataAgendamento { get; set; }
         public DateTime DataLimiteExecucao { get; set; }
-        public DateTime DataExecucao { get; set; }
+        public DateTime? DataExecucao { get; set; }
     }
 }

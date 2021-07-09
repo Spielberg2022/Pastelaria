@@ -1,4 +1,5 @@
-﻿using Pastelaria.Domain.DisparoEmail.Dto;
+﻿using _5_Pastelaria.Repository.Repositories;
+using Pastelaria.Domain.DisparoEmail.Dto;
 using Pastelaria.Domain.Usuario.Dto;
 using System;
 using System.Collections.Generic;
@@ -8,32 +9,36 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pastelaria.Domain.DisparoEmail.Infra
+namespace Pastelaria.Services.Services
 {
     public class DisparoEmailService
     {
-        private DisparoEmailDto _email;
-        private UsuarioDto _usuario;
 
-        public DisparoEmailService(DisparoEmailDto email, UsuarioDto usuario)
+        private readonly DisparoEmailRepository _disparoEmailRepository;
+
+        public DisparoEmailService()
         {
-            _email = email;
-            _usuario = usuario;
+            _disparoEmailRepository = new DisparoEmailRepository();
         }
 
-        public bool EnviarEmail()
+        public string Post(DisparoEmailDto disparoEmailDto, UsuarioDto usuario)
         {
-            //Codigo de envio de email
+            var disparoEmail = _disparoEmailRepository.GetDisparoEmailPorIdTarefa(disparoEmailDto.IdTarefa);
+
+            if(disparoEmail != null)
+            {
+                return "Email já enviado!";
+            }
             try
             {
                 MailMessage _mailMessage = new MailMessage();
 
                 _mailMessage.From = new MailAddress("wesleysmn2021@gmail.com");
 
-                _mailMessage.CC.Add(_usuario.Email);
-                _mailMessage.Subject = _email.Assunto;
+                _mailMessage.CC.Add(usuario.Email);
+                _mailMessage.Subject = disparoEmailDto.Assunto;
                 _mailMessage.IsBodyHtml = true;
-                _mailMessage.Body = _email.Mensagem;
+                _mailMessage.Body = disparoEmailDto.Mensagem;
 
                 SmtpClient _smtpClient = new SmtpClient("smtp.gmail.com", 587);
                 _smtpClient.EnableSsl = true;
@@ -42,14 +47,14 @@ namespace Pastelaria.Domain.DisparoEmail.Infra
                 _smtpClient.Credentials = new NetworkCredential("wesleysmn2021@gmail.com", "wsly1987");
 
                 _smtpClient.Send(_mailMessage);
-
-                return true;
+                _disparoEmailRepository.Post(disparoEmailDto);
             }
             catch (Exception ex)
             {
-                return false;
                 throw;
             }
+
+            return string.Empty;
         }
     }
 }

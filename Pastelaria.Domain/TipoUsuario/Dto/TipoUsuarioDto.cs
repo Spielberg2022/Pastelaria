@@ -8,7 +8,7 @@ namespace Pastelaria.Domain.TipoUsuario.Dto
 {
     public class TipoUsuarioDto
     {
-        public int Codigo { get; }
+        public int Codigo { get; set; }
         public string Descricao { get; set; }
     }
 }

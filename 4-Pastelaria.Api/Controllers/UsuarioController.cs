@@ -31,7 +31,7 @@ namespace _4_Pastelaria.Api.Controllers
             }
             catch(Exception ex)
             {
-                return BadRequest("Falha ao fazer login!");
+                return BadRequest("Falha ao fazer login!" + ex.Message);
             }
         }
         
@@ -48,7 +48,7 @@ namespace _4_Pastelaria.Api.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest("Falha ao inserir usuário!" + ex.Message);
             }
         }
     }

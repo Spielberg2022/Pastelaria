@@ -8,7 +8,7 @@ namespace Pastelaria.Domain.TipoEmail.Dto
 {
     public class TipoEmailDto
     {
-        public int Codigo { get; }
+        public int Codigo { get; set; }
         public string Descricao { get; set; }
     }
 }

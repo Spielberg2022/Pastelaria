@@ -1,4 +1,5 @@
 ﻿using _5_Pastelaria.Repository.Repositories;
+using Pastelaria.Domain.Tarefa.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,20 @@ namespace _4_Pastelaria.Api.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Falha ao retornar tarefa!");
+                return BadRequest("Falha ao retornar tarefa!" + ex.Message);
+            }
+        }
+
+        public IHttpActionResult Post(TarefaDto tarefa)
+        {
+            try
+            {
+                _tarefaRepository.Post(tarefa);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Falha ao inserir tarefa!" + ex.Message);
             }
         }
         

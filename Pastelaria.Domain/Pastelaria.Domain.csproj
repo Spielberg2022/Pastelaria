@@ -48,7 +48,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DisparoEmail\Dto\DisparoEmailDto.cs" />
-    <Compile Include="DisparoEmail\Infra\DisparoEmailService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tarefa\Dto\TarefaDto.cs" />
     <Compile Include="TipoEmail\Dto\TipoEmail.cs" />

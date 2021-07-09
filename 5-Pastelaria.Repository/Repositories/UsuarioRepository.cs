@@ -12,7 +12,6 @@ namespace _5_Pastelaria.Repository
         public UsuarioRepository()
         {
             conexao = new Conexao();
-
         }
 
         private enum Procedures

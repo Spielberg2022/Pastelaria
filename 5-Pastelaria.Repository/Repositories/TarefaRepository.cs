@@ -55,7 +55,7 @@ namespace _5_Pastelaria.Repository.Repositories
 
         public TarefaDto GetTarefaPorId(int id)
         {
-            conexao.ExecuteProcedure(Procedures.PSP_SelTarefaPorUsuario);
+            conexao.ExecuteProcedure(Procedures.PSP_SelTarefaPorId);
             conexao.AddParameter("@Id", id);
             using (var r = conexao.ExecuteReader())
             {
