@@ -1,4 +1,5 @@
 ﻿using _5_Pastelaria.Repository.Repositories;
+using _6_Pastelaria.Services.Services;
 using Pastelaria.Domain.Tarefa.Dto;
 using System;
 using System.Collections.Generic;
@@ -14,11 +15,13 @@ namespace _4_Pastelaria.Api.Controllers
     {
         private readonly TarefaRepository _tarefaRepository;
         private readonly DisparoEmailRepository _disparoEmailRepository;
+        private readonly TarefaService _tarefaService;
 
         public TarefaController()
         {
             _tarefaRepository = new TarefaRepository();
             _disparoEmailRepository = new DisparoEmailRepository();
+            _tarefaService = new TarefaService();
         }
 
         public IHttpActionResult GetTarefaPorId(int id)
@@ -38,9 +41,7 @@ namespace _4_Pastelaria.Api.Controllers
         {
             try
             {
-                var tarefa = _tarefaRepository.Post(tarefaDto);
-                var disparoEmail = _disparoEmailRepository.GetDisparoEmailPorIdTarefa(tarefa);
-                _disparoEmailRepository.Post(disparoEmail);
+                var tarefa = _tarefaService.Post(tarefaDto);
                 return Ok();
             }
             catch (Exception ex)

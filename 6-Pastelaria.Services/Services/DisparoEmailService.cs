@@ -23,8 +23,6 @@ namespace Pastelaria.Services.Services
 
         public string Post(DisparoEmailDto disparoEmailDto)
         {
-            var disparoEmail = _disparoEmailRepository.GetDisparoEmailPorIdTarefa(disparoEmailDto.IdTarefa);
-
             try
             {
                 MailMessage _mailMessage = new MailMessage();

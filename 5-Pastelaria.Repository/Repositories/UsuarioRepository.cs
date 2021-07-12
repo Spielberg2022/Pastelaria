@@ -18,7 +18,9 @@ namespace _5_Pastelaria.Repository
         {
             PSP_SelUsuarioPorEmaileSenha,
             PSP_InsUsuario,
-            PSP_SelUsuarioPorEmail
+            PSP_SelUsuarioPorEmail,
+            PSP_SelEmailUsuarioPorId,
+            PSP_SelUsuarioPorId
         }
 
         public UsuarioDto GetLogin(string email, string senha)
@@ -42,7 +44,7 @@ namespace _5_Pastelaria.Repository
 
         public UsuarioDto GetUsuarioPorId(int idUsuario)
         {
-            conexao.ExecuteProcedure(Procedures.PSP_SelUsuarioPorEmail);
+            conexao.ExecuteProcedure(Procedures.PSP_SelUsuarioPorId);
             conexao.AddParameter("@Id", idUsuario);
             using (var r = conexao.ExecuteReader())
             {

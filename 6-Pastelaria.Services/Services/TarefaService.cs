@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace _6_Pastelaria.Services.Services
 {
-    class TarefaService
+    public class TarefaService
     {
         private readonly TarefaRepository _tarefaRepository;
         private readonly DisparoEmailRepository _disparoEmailrepository;
@@ -28,17 +28,13 @@ namespace _6_Pastelaria.Services.Services
         public string Post(TarefaDto tarefaDto)
         {
             var usuario = _usuarioRepository.GetUsuarioPorId(tarefaDto.IdUsuario);
-            var gestor = _usuarioRepository.GetUsuarioPorId(tarefaDto.IdGestor);
-
-            tarefaDto.IdGestor = gestor.Id;
 
             var idTarefa = _tarefaRepository.Post(tarefaDto);
 
-            _disparoEmailrepository.GetDisparoEmailPorIdTarefa(idTarefa);
             _disparoEmailService.Post(new Pastelaria.Domain.DisparoEmail.Dto.DisparoEmailDto
             {
                 IdTarefa = idTarefa,
-                IdUsuarioDestinatario = usuario.Id,
+                IdUsuarioDestinatario = tarefaDto.IdUsuario,
                 CodigoTipoEmail = 1,
                 Mensagem = tarefaDto.TarefaDescricao,
                 Assunto = tarefaDto.Assunto,

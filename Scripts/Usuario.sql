@@ -107,5 +107,67 @@ CREATE PROCEDURE [dbo].[PSP_SelUsuarioPorEmail]
 
 	END;
 GO
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[PSP_SelEmailUsuarioPorId]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[PSP_SelEmailUsuarioPorId]
+GO
+
+CREATE PROCEDURE [dbo].[PSP_SelEmailUsuarioPorId]
+	@Id int
+	AS
+
+	/*
+	Documentacao
+	Arquivo Fonte.....: Usuario.sql
+	Objetivo..........: Busca e-mail do usuário por Id
+	Autor.............: SMN - Wesley Silveira
+ 	Data..............: 12/07/2021
+	Ex................: EXEC [dbo].[PSP_SelEmailUsuarioPorId]
+
+	*/
+
+	BEGIN;
+
+		-- nolock em todas tabelas da proc
+		SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+
+		SELECT Email
+			FROM Usuario
+			WHERE Id = @Id
+
+	END;
+GO
 				
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[PSP_SelUsuarioPorId]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[PSP_SelUsuarioPorId]
+GO
+
+CREATE PROCEDURE [dbo].[PSP_SelUsuarioPorId]
+	@Id int
+	AS
+
+	/*
+	Documentacao
+	Arquivo Fonte.....: Usuario.sql
+	Objetivo..........: Busca o usuário pelo Id informado
+	Autor.............: SMN - Wesley Silveira
+ 	Data..............: 12/07/2021
+	Ex................: EXEC [dbo].[PSP_SelUsuarioPorId]
+
+	*/
+
+	BEGIN;
+
+		-- nolock em todas tabelas da proc
+		SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+
+		SELECT Id, CodigoTipoUsuario, Email, Senha, Nome, DataNascimento, TelefoneFixo, TelefoneCelular, Logradouro, Bairro, Cidade, Uf, Cep, Foto
+			FROM Usuario
+			WHERE Id = @Id
+
+	END;
+GO
+								
 								

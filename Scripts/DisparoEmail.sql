@@ -7,7 +7,8 @@ CREATE PROCEDURE [dbo].[PSP_InsDisparoEmail]
 	@IdUsuarioDestinatario int,
 	@CodigoTipoEmail tinyint,
 	@Mensagem nvarchar(500),
-	@Assunto varchar(80)
+	@Assunto varchar(80),
+	@Email varchar(70)
 	AS
 
 	/*
@@ -22,8 +23,8 @@ CREATE PROCEDURE [dbo].[PSP_InsDisparoEmail]
 
 	BEGIN;
 
-		INSERT INTO DisparoEmail (IdTarefa, IdUsuarioDestinatario, CodigoTipoEmail, Mensagem, Assunto)
-			VALUES (@IdTarefa,@IdUsuarioDestinatario,@CodigoTipoEmail,@Mensagem,@Assunto)
+		INSERT INTO DisparoEmail (IdTarefa, IdUsuarioDestinatario, CodigoTipoEmail, Mensagem, Assunto, Email)
+			VALUES (@IdTarefa,@IdUsuarioDestinatario,@CodigoTipoEmail,@Mensagem,@Assunto,@Email)
 
 	END;
 GO
@@ -74,7 +75,7 @@ CREATE PROCEDURE [dbo].[PSP_SelDisparoEmailPorIdTarefa]
 	Objetivo..........: Buscar e-mail enviado por IdTarefa
 	Autor.............: SMN - Wesley Silveira
  	Data..............: 09/07/2021
-	Ex................: EXEC [dbo].[PSP_SelDisparoEmailPorIdTarefa]
+	Ex................: EXEC [dbo].[PSP_SelDisparoEmailPorIdTarefa]23
 
 	*/
 

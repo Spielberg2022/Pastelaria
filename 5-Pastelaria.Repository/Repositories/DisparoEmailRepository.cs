@@ -32,6 +32,7 @@ namespace _5_Pastelaria.Repository.Repositories
             conexao.AddParameter("@CodigoTipoEmail", disparoEmail.CodigoTipoEmail);
             conexao.AddParameter("@Mensagem", disparoEmail.Mensagem);
             conexao.AddParameter("@Assunto", disparoEmail.Assunto);
+            conexao.AddParameter("@Email", disparoEmail.Email);
             conexao.ExecuteNonQuery();
         }
 
@@ -41,7 +42,7 @@ namespace _5_Pastelaria.Repository.Repositories
             conexao.AddParameter("@IdTarefa", idTarefa);
             using (var r = conexao.ExecuteReader())
             {
-                if (!r.Read())
+                if (r.Read())
                 {
                     return new DisparoEmailDto
                     {
