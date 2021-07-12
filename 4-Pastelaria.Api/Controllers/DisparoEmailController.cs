@@ -11,6 +11,7 @@ using System.Web.Http;
 
 namespace _4_Pastelaria.Api.Controllers
 {
+    [RoutePrefix("api/DisparoEmail")]
     public class DisparoEmailController : ApiController
     {
         private readonly DisparoEmailRepository _disparoEmailRepository;
@@ -39,7 +40,7 @@ namespace _4_Pastelaria.Api.Controllers
         {
             try
             {
-                var retorno = _disparoEmailService.Post(disparoEmail,usuario);
+                var retorno = _disparoEmailService.Post(disparoEmail);
                 if (!string.IsNullOrEmpty(retorno))
                 {
                     return BadRequest(retorno);

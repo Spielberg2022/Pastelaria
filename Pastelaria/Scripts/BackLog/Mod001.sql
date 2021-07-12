@@ -1,5 +1,5 @@
 CREATE TABLE [dbo].[TipoUsuario](
-	Codigo tinyint not null IDENTITY(1,1),
+	Codigo tinyint not null, 
 	Descricao varchar(25) not null,
 
 	CONSTRAINT TipoUsuario_Pk PRIMARY KEY(Codigo)
@@ -40,7 +40,7 @@ CREATE TABLE [dbo].[Tarefa](
 )
 GO
 CREATE TABLE [dbo].[TipoEmail](
-	Codigo tinyint not null IDENTITY(1,1),
+	Codigo tinyint not null,
 	Descricao varchar(25) not null,
 
 	CONSTRAINT TipoEmail_Pk PRIMARY KEY(Codigo)

@@ -40,6 +40,36 @@ namespace _5_Pastelaria.Repository
             return usuario;
         }
 
+        public UsuarioDto GetUsuarioPorId(int idUsuario)
+        {
+            conexao.ExecuteProcedure(Procedures.PSP_SelUsuarioPorEmail);
+            conexao.AddParameter("@Id", idUsuario);
+            using (var r = conexao.ExecuteReader())
+            {
+                if (r.Read())
+                {
+                    return new UsuarioDto
+                    {
+                        Id = int.Parse(r["Id"].ToString()),
+                        CodigoTipoUsuario = int.Parse(r["CodigoTipoUsuario"].ToString()),
+                        Email = r["Email"].ToString(),
+                        Senha = r["Senha"].ToString(),
+                        Nome = r["Nome"].ToString(),
+                        DataNascimento = DateTime.Parse(r["DataNascimento"].ToString()),
+                        Telefonefixo = r["TelefoneFixo"].ToString(),
+                        TelefoneCelular = r["TelefoneCelular"].ToString(),
+                        Logradouro = r["Logradouro"].ToString(),
+                        Bairro = r["Bairro"].ToString(),
+                        Cidade = r["Cidade"].ToString(),
+                        Uf = r["Uf"].ToString(),
+                        Cep = r["Cep"].ToString(),
+                        Foto = r["Foto"].ToString()
+                    };
+                }
+            }
+            return null;
+        }
+
         public void Post(UsuarioDto usuario)
         {
             conexao.ExecuteProcedure(Procedures.PSP_InsUsuario);
@@ -59,10 +89,10 @@ namespace _5_Pastelaria.Repository
             conexao.ExecuteNonQuery();
         }
 
-        public UsuarioDto GetUsuarioPorEmail(string Email)
+        public UsuarioDto GetUsuarioPorEmail(string email)
         {
             conexao.ExecuteProcedure(Procedures.PSP_SelUsuarioPorEmail);
-            conexao.AddParameter("@Email", Email);
+            conexao.AddParameter("@Email", email);
             using (var r = conexao.ExecuteReader())
             {
                 if (r.Read() )

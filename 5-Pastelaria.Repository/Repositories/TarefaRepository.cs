@@ -24,7 +24,7 @@ namespace _5_Pastelaria.Repository.Repositories
             PSP_SelTarefaPorId
         }
 
-        public void Post(TarefaDto tarefa)
+        public int Post(TarefaDto tarefa)
         {
             conexao.ExecuteProcedure(Procedures.PSP_InsTarefa);
             conexao.AddParameter("@IdGestor", tarefa.IdGestor);
@@ -33,7 +33,8 @@ namespace _5_Pastelaria.Repository.Repositories
             conexao.AddParameter("@DataAgendamento", tarefa.DataAgendamento);
             conexao.AddParameter("@DataLimiteExecucao", tarefa.DataLimiteExecucao);
             conexao.AddParameter("@DataExecucao", tarefa.DataExecucao);
-            conexao.ExecuteNonQuery();
+
+            return conexao.ExecuteNonQueryWithReturn();
         }
 
         public TarefaDto GetTarefaPorIdUsuario(int idUsuario)

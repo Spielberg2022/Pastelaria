@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<_locDefinition xmlns="urn:locstudio">
+		<_locDefault _loc="locNone" />
+		<_locTag _loc="locData">Title</_locTag>
+		<_locTag _loc="locData">Description</_locTag>
+		<_locTag _loc="locData">Author</_locTag>
+		<_locTag _loc="locData">ToolTip</_locTag>
+	</_locDefinition>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>TableFunction</Title>
+			<Shortcut>TableFunction01</Shortcut>
+			<Description>Cria o bloco de padrão de função table da momentum</Description>
+			<Author>Pedro Figueredo</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Declarations>
+				<Literal>
+					<ID>NomeTableFunction</ID>
+					<ToolTip>Nome da Função</ToolTip>
+					<Default>NomeTableFunction</Default>
+				</Literal>
+				<Literal>
+					<ID>NomeTrab</ID>
+					<ToolTip>Nome da tabela de retorno</ToolTip>
+					<Default>NomeTrab</Default>
+				</Literal>
+				<Literal>
+					<ID>Objetivo</ID>
+					<ToolTip>Descrição da Função</ToolTip>
+					<Default>Objetivo</Default>
+				</Literal>
+				<Literal>
+					<ID>Data</ID>
+					<ToolTip>Data da criação da Função</ToolTip>
+					<Default>01/01</Default>
+				</Literal>
+				<Literal>
+					<ID>TableFunction</ID>
+					<ToolTip>TableFunction</ToolTip>
+					<Default>SELECT </Default>
+				</Literal>
+			</Declarations>
+			<Code Language="SQL">
+<![CDATA[IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[PFNC_$NomeTableFunction$]') AND objectproperty(id, N'IsTableFunction')=1)
+	DROP FUNCTION [dbo].[PFNC_$NomeTableFunction$]
+GO
+
+CREATE FUNCTION [dbo].[PFNC_$NomeTableFunction$]
+	(@Parametro datetime)
+
+	RETURNS @$NomeTrab$ TABLE(
+		CalcValParc VARCHAR(MAX)
+	)
+
+	AS
+
+	/*
+	Documentacao
+	Objetivo..........: $Objetivo$
+	Autor.............: SMN - Wesley Silveira
+ 	Data..............: $Data$/2021
+	Ex................: SELECT * FROM  [dbo].[PFNC_$NomeTableFunction$]
+
+	*/
+
+	BEGIN;
+	
+		RETURN @$NomeTrab$;
+
+	END;
+GO]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

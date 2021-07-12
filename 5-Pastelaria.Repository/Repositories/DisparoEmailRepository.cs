@@ -20,7 +20,8 @@ namespace _5_Pastelaria.Repository.Repositories
         private enum Procedures
         {
             PSP_InsDisparoEmail,
-            PSP_SelDisparoEmailPorIdTarefa
+            PSP_SelDisparoEmailPorIdTarefa,
+            PSP_SelTarefaPorId
         }
 
         public void Post(DisparoEmailDto disparoEmail)
@@ -40,7 +41,7 @@ namespace _5_Pastelaria.Repository.Repositories
             conexao.AddParameter("@IdTarefa", idTarefa);
             using (var r = conexao.ExecuteReader())
             {
-                if(r.Read())
+                if (!r.Read())
                 {
                     return new DisparoEmailDto
                     {

@@ -21,21 +21,17 @@ namespace Pastelaria.Services.Services
             _disparoEmailRepository = new DisparoEmailRepository();
         }
 
-        public string Post(DisparoEmailDto disparoEmailDto, UsuarioDto usuario)
+        public string Post(DisparoEmailDto disparoEmailDto)
         {
             var disparoEmail = _disparoEmailRepository.GetDisparoEmailPorIdTarefa(disparoEmailDto.IdTarefa);
 
-            if(disparoEmail != null)
-            {
-                return "Email já enviado!";
-            }
             try
             {
                 MailMessage _mailMessage = new MailMessage();
 
                 _mailMessage.From = new MailAddress("wesleysmn2021@gmail.com");
 
-                _mailMessage.CC.Add(usuario.Email);
+                _mailMessage.CC.Add(disparoEmailDto.Email);
                 _mailMessage.Subject = disparoEmailDto.Assunto;
                 _mailMessage.IsBodyHtml = true;
                 _mailMessage.Body = disparoEmailDto.Mensagem;

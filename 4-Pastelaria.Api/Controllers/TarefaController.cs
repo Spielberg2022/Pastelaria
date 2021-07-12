@@ -13,10 +13,12 @@ namespace _4_Pastelaria.Api.Controllers
     public class TarefaController : ApiController
     {
         private readonly TarefaRepository _tarefaRepository;
+        private readonly DisparoEmailRepository _disparoEmailRepository;
 
         public TarefaController()
         {
             _tarefaRepository = new TarefaRepository();
+            _disparoEmailRepository = new DisparoEmailRepository();
         }
 
         public IHttpActionResult GetTarefaPorId(int id)
@@ -32,11 +34,13 @@ namespace _4_Pastelaria.Api.Controllers
             }
         }
 
-        public IHttpActionResult Post(TarefaDto tarefa)
+        public IHttpActionResult Post(TarefaDto tarefaDto)
         {
             try
             {
-                _tarefaRepository.Post(tarefa);
+                var tarefa = _tarefaRepository.Post(tarefaDto);
+                var disparoEmail = _disparoEmailRepository.GetDisparoEmailPorIdTarefa(tarefa);
+                _disparoEmailRepository.Post(disparoEmail);
                 return Ok();
             }
             catch (Exception ex)
