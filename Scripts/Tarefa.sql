@@ -91,4 +91,32 @@ CREATE PROCEDURE [dbo].[PSP_SelTarefaPorId]
 	END;
 GO
 				
-								
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[PSP_UpdDataExecucaoTarefa]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[PSP_UpdDataExecucaoTarefa]
+GO
+
+CREATE PROCEDURE [dbo].[PSP_UpdDataExecucaoTarefa]
+	@DataExecucao date = null,
+	@Id int
+	AS
+
+	/*
+	Documentacao
+	Arquivo Fonte.....: Tarefa.sql
+	Objetivo..........: Atualiza a data da execução da tabela Tarefa.
+	Autor.............: SMN - Wesley Silveira
+ 	Data..............: 12/07/2021
+	Ex................: EXEC [dbo].[PSP_UpdDataExecucaoTarefa]
+
+	*/
+
+	BEGIN;
+
+		UPDATE Tarefa
+			SET DataExecucao = @DataExecucao
+			WHERE Id = @Id
+
+	END;
+GO
+				

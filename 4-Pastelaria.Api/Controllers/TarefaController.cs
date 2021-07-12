@@ -50,5 +50,18 @@ namespace _4_Pastelaria.Api.Controllers
             }
         }
         
+        public IHttpActionResult PostDataExecucao(TarefaDto tarefaDto)
+        {
+            try
+            {
+                var tarefa = _tarefaService.PostExecutar(tarefaDto);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest("Falha ao finalizar tarefa!" + ex.Message);
+            }
+        }
     }
 }

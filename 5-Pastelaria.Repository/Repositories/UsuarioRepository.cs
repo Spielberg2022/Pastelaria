@@ -95,6 +95,7 @@ namespace _5_Pastelaria.Repository
         {
             conexao.ExecuteProcedure(Procedures.PSP_SelUsuarioPorEmail);
             conexao.AddParameter("@Email", email);
+
             using (var r = conexao.ExecuteReader())
             {
                 if (r.Read() )

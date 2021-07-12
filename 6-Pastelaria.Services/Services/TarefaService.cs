@@ -43,5 +43,24 @@ namespace _6_Pastelaria.Services.Services
 
             return string.Empty;
         }
+
+        public string PostExecutar(TarefaDto tarefaDto)
+        {
+            _tarefaRepository.PostExecutar(tarefaDto);
+
+            var usuario = _usuarioRepository.GetUsuarioPorId(tarefaDto.IdGestor);
+
+            _disparoEmailService.Post(new Pastelaria.Domain.DisparoEmail.Dto.DisparoEmailDto
+            {
+                IdTarefa = tarefaDto.Id,
+                IdUsuarioDestinatario = tarefaDto.IdGestor,
+                CodigoTipoEmail = 2,
+                Mensagem = "Tarefa Id: '"+ tarefaDto.Id + "' Assunto:'"+ tarefaDto.Assunto +"' concluída.",
+                Assunto = tarefaDto.Assunto,
+                Email = usuario.Email
+            });
+
+            return string.Empty;
+        }
     }
 }
