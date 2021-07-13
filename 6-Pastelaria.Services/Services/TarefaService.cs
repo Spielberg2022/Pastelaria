@@ -1,28 +1,31 @@
 ﻿using _5_Pastelaria.Repository;
 using _5_Pastelaria.Repository.Repositories;
 using Pastelaria.Domain.Tarefa.Dto;
+using Pastelaria.Domain.Tarefa;
+using Pastelaria.Domain.Usuario;
 using Pastelaria.Services.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Pastelaria.Domain.DisparoEmail;
 
 namespace _6_Pastelaria.Services.Services
 {
-    public class TarefaService
+    public class TarefaService : ITarefaService
     {
-        private readonly TarefaRepository _tarefaRepository;
-        private readonly UsuarioRepository _usuarioRepository;
-        private readonly DisparoEmailRepository _disparoEmailRepository;
-        private readonly DisparoEmailService _disparoEmailService;
+        private readonly ITarefaRepository _tarefaRepository;
+        private readonly IUsuarioRepository _usuarioRepository;
+        private readonly IDisparoEmailRepository _disparoEmailRepository;
+        private readonly IDisparoEmailService _disparoEmailService;
 
-        public TarefaService()
+        public TarefaService(IUsuarioRepository usuarioRepository, ITarefaRepository tarefaRepository, IDisparoEmailRepository disparoEmailRepository, IDisparoEmailService disparoEmailService)
         {
-            _tarefaRepository = new TarefaRepository();
-            _usuarioRepository = new UsuarioRepository();
-            _disparoEmailRepository = new DisparoEmailRepository();
-            _disparoEmailService = new DisparoEmailService();
+            _tarefaRepository = tarefaRepository;
+            _usuarioRepository = usuarioRepository;
+            _disparoEmailRepository = disparoEmailRepository;
+            _disparoEmailService = disparoEmailService;
         }
 
         public string Post(TarefaDto tarefaDto)

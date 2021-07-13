@@ -1,5 +1,7 @@
 ﻿using _5_Pastelaria.Repository.Repositories;
+using _6_Pastelaria.Services;
 using _6_Pastelaria.Services.Services;
+using Pastelaria.Domain.Tarefa;
 using Pastelaria.Domain.Tarefa.Dto;
 using System;
 using System.Collections.Generic;
@@ -13,13 +15,13 @@ namespace _4_Pastelaria.Api.Controllers
     [RoutePrefix("api/Tarefa")]
     public class TarefaController : ApiController
     {
-        private readonly TarefaRepository _tarefaRepository;
-        private readonly TarefaService _tarefaService;
+        private readonly ITarefaRepository _tarefaRepository;
+        private readonly ITarefaService _tarefaService;
 
-        public TarefaController()
+        public TarefaController(ITarefaRepository iTarefaRepository, ITarefaService tarefaService)
         {
-            _tarefaRepository = new TarefaRepository();
-            _tarefaService = new TarefaService();
+            _tarefaRepository = iTarefaRepository;
+            _tarefaService = tarefaService;
         }
 
         /// <summary>

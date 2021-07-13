@@ -1,4 +1,5 @@
-﻿using Pastelaria.Domain.Usuario.Dto;
+﻿using Pastelaria.Domain.Usuario;
+using Pastelaria.Domain.Usuario.Dto;
 using ProjetoBanco.Infra.Data.Repositories;
 using System;
 using System.Collections.Generic;
@@ -6,12 +7,12 @@ using System.Text;
 
 namespace _5_Pastelaria.Repository
 {
-    public class UsuarioRepository
+    public class UsuarioRepository : IUsuarioRepository
     {
-        private readonly Conexao conexao;
-        public UsuarioRepository()
+        private readonly Conexao _conexao;
+        public UsuarioRepository(Conexao conexao)
         {
-            conexao = new Conexao();
+            _conexao = conexao;
         }
 
         private enum Procedures
@@ -26,10 +27,10 @@ namespace _5_Pastelaria.Repository
         public UsuarioDto GetLogin(string email, string senha)
         {
             var usuario = new UsuarioDto();
-            conexao.ExecuteProcedure(Procedures.PSP_SelUsuarioPorEmaileSenha);
-            conexao.AddParameter("@email", email);
-            conexao.AddParameter("@senha", senha);
-            using (var r = conexao.ExecuteReader())
+            _conexao.ExecuteProcedure(Procedures.PSP_SelUsuarioPorEmaileSenha);
+            _conexao.AddParameter("@email", email);
+            _conexao.AddParameter("@senha", senha);
+            using (var r = _conexao.ExecuteReader())
             {
                 if (r.Read())
                 {
@@ -44,9 +45,9 @@ namespace _5_Pastelaria.Repository
 
         public UsuarioDto GetUsuarioPorId(int idUsuario)
         {
-            conexao.ExecuteProcedure(Procedures.PSP_SelUsuarioPorId);
-            conexao.AddParameter("@Id", idUsuario);
-            using (var r = conexao.ExecuteReader())
+            _conexao.ExecuteProcedure(Procedures.PSP_SelUsuarioPorId);
+            _conexao.AddParameter("@Id", idUsuario);
+            using (var r = _conexao.ExecuteReader())
             {
                 if (r.Read())
                 {
@@ -83,29 +84,29 @@ namespace _5_Pastelaria.Repository
 
         public void Post(UsuarioDto usuario)
         {
-            conexao.ExecuteProcedure(Procedures.PSP_InsUsuario);
-            conexao.AddParameter("@CodigoTipoUsuario", usuario.CodigoTipoUsuario);
-            conexao.AddParameter("@Email", usuario.Email);
-            conexao.AddParameter("@Senha", usuario.Senha);
-            conexao.AddParameter("@Nome", usuario.Nome);
-            conexao.AddParameter("@DataNascimento", usuario.DataNascimento);
-            conexao.AddParameter("@TelefoneFixo", usuario.Telefonefixo);
-            conexao.AddParameter("@TelefoneCelular", usuario.TelefoneCelular);
-            conexao.AddParameter("@Logradouro", usuario.Logradouro);
-            conexao.AddParameter("@Bairro", usuario.Bairro);
-            conexao.AddParameter("@Cidade", usuario.Cidade);
-            conexao.AddParameter("@Uf", usuario.Uf);
-            conexao.AddParameter("@Cep", usuario.Cep);
-            conexao.AddParameter("@Foto", usuario.Foto);
-            conexao.ExecuteNonQuery();
+            _conexao.ExecuteProcedure(Procedures.PSP_InsUsuario);
+            _conexao.AddParameter("@CodigoTipoUsuario", usuario.CodigoTipoUsuario);
+            _conexao.AddParameter("@Email", usuario.Email);
+            _conexao.AddParameter("@Senha", usuario.Senha);
+            _conexao.AddParameter("@Nome", usuario.Nome);
+            _conexao.AddParameter("@DataNascimento", usuario.DataNascimento);
+            _conexao.AddParameter("@TelefoneFixo", usuario.Telefonefixo);
+            _conexao.AddParameter("@TelefoneCelular", usuario.TelefoneCelular);
+            _conexao.AddParameter("@Logradouro", usuario.Logradouro);
+            _conexao.AddParameter("@Bairro", usuario.Bairro);
+            _conexao.AddParameter("@Cidade", usuario.Cidade);
+            _conexao.AddParameter("@Uf", usuario.Uf);
+            _conexao.AddParameter("@Cep", usuario.Cep);
+            _conexao.AddParameter("@Foto", usuario.Foto);
+            _conexao.ExecuteNonQuery();
         }
 
         public UsuarioDto GetUsuarioPorEmail(string email)
         {
-            conexao.ExecuteProcedure(Procedures.PSP_SelUsuarioPorEmail);
-            conexao.AddParameter("@Email", email);
+            _conexao.ExecuteProcedure(Procedures.PSP_SelUsuarioPorEmail);
+            _conexao.AddParameter("@Email", email);
 
-            using (var r = conexao.ExecuteReader())
+            using (var r = _conexao.ExecuteReader())
             {
                 if (r.Read() )
                 {

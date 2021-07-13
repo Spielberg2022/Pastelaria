@@ -1,24 +1,56 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Formatting;
+using System.Web;
 using System.Web.Http;
+using System.Web.Http.Dependencies;
 
 namespace _4_Pastelaria.Api
 {
-    public static class WebApiConfig
+    public abstract class WebApiConfig : HttpApplication
     {
-        public static void Register(HttpConfiguration config)
+        private readonly IDependencyResolver _depResolver;
+
+        protected WebApiConfig(IDependencyResolver depResolver)
         {
-            // Serviços e configuração da API da Web
+            _depResolver = depResolver;
+        }
 
-            // Rotas da API da Web
-            config.MapHttpAttributeRoutes();
+        protected void Application_Start()
+        {
+            GlobalConfiguration.Configure(config =>
+            {
+                // Web API configuration and services
 
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
+                // Web API routes
+                config.MapHttpAttributeRoutes();
+
+                config.Routes.MapHttpRoute(
+                    name: "DefaultApi",
+                    routeTemplate: "api/{controller}/{action}"
+                );
+
+                config.Formatters.Clear();
+                config.Formatters.Add(new JsonMediaTypeFormatter
+                {
+                    SerializerSettings = new JsonSerializerSettings
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                        ContractResolver = new DefaultContractResolver
+                        {
+                            IgnoreSerializableAttribute = true
+                        }
+                    }
+
+                });
+
+                config.DependencyResolver = _depResolver;
+            });
         }
     }
+
 }

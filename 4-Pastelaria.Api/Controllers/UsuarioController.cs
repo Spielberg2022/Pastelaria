@@ -1,4 +1,5 @@
 ﻿using _5_Pastelaria.Repository;
+using Pastelaria.Domain.Usuario;
 using Pastelaria.Domain.Usuario.Dto;
 using Pastelaria.Domain.Usuario.Services;
 using System;
@@ -16,10 +17,11 @@ namespace _4_Pastelaria.Api.Controllers
         private readonly UsuarioRepository _usuarioRepository;
         private readonly UsuarioService _usuarioService;
 
-        public UsuarioController()
+        private readonly IUsuarioRepository _iUsuarioRespository;
+
+        public UsuarioController(IUsuarioRepository iUsuarioRespository)
         {
-            _usuarioRepository = new UsuarioRepository();
-            _usuarioService = new UsuarioService();
+            _iUsuarioRespository = iUsuarioRespository;
         }
 
         /// <summary>
@@ -32,7 +34,7 @@ namespace _4_Pastelaria.Api.Controllers
         {
             try
             {
-                var usuario = _usuarioRepository.GetLogin(email, senha);
+                var usuario = _iUsuarioRespository.GetLogin(email, senha);
                 return Ok(usuario);
             }
             catch(Exception ex)

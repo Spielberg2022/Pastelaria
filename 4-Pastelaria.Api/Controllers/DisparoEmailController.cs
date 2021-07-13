@@ -1,4 +1,6 @@
 ﻿using _5_Pastelaria.Repository.Repositories;
+using _6_Pastelaria.Services;
+using Pastelaria.Domain.DisparoEmail;
 using Pastelaria.Domain.DisparoEmail.Dto;
 using Pastelaria.Domain.Usuario.Dto;
 using Pastelaria.Services.Services;
@@ -14,13 +16,13 @@ namespace _4_Pastelaria.Api.Controllers
     [RoutePrefix("api/DisparoEmail")]
     public class DisparoEmailController : ApiController
     {
-        private readonly DisparoEmailRepository _disparoEmailRepository;
-        private readonly DisparoEmailService _disparoEmailService;
+        private readonly IDisparoEmailRepository _disparoEmailRepository;
+        private readonly IDisparoEmailService _disparoEmailService;
 
-        public DisparoEmailController()
+        public DisparoEmailController(IDisparoEmailRepository disparoEmailRepository, IDisparoEmailService disparoEmailService)
         {
-            _disparoEmailRepository = new DisparoEmailRepository();
-            _disparoEmailService = new DisparoEmailService();
+            _disparoEmailRepository = disparoEmailRepository;
+            _disparoEmailService = disparoEmailService;
         }
 
         public IHttpActionResult GetDisparoEmailPorIdTarefa(int idTarefa)

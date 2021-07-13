@@ -1,4 +1,6 @@
 ﻿using _5_Pastelaria.Repository.Repositories;
+using _6_Pastelaria.Services;
+using Pastelaria.Domain.DisparoEmail;
 using Pastelaria.Domain.DisparoEmail.Dto;
 using Pastelaria.Domain.Usuario.Dto;
 using System;
@@ -11,14 +13,13 @@ using System.Threading.Tasks;
 
 namespace Pastelaria.Services.Services
 {
-    public class DisparoEmailService
+    public class DisparoEmailService : IDisparoEmailService
     {
+        private readonly IDisparoEmailRepository _disparoEmailRepository;
 
-        private readonly DisparoEmailRepository _disparoEmailRepository;
-
-        public DisparoEmailService()
+        public DisparoEmailService(IDisparoEmailRepository disparoEmailRepository)
         {
-            _disparoEmailRepository = new DisparoEmailRepository();
+            _disparoEmailRepository = disparoEmailRepository;
         }
 
         public string Post(DisparoEmailDto disparoEmailDto)

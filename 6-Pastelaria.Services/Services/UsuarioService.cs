@@ -11,11 +11,11 @@ namespace Pastelaria.Domain.Usuario.Services
 
     public class UsuarioService
     {
-        private readonly UsuarioRepository _usuarioRepository;
+        private readonly IUsuarioRepository _usuarioRepository;
 
-        public UsuarioService()
+        public UsuarioService(IUsuarioRepository usuarioRepository)
         {
-            _usuarioRepository = new UsuarioRepository();
+            _usuarioRepository = usuarioRepository;
         }
 
         public string Post(UsuarioDto usuarioDto)

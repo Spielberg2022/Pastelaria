@@ -1,4 +1,5 @@
-﻿using Pastelaria.Domain.Tarefa.Dto;
+﻿using Pastelaria.Domain.Tarefa;
+using Pastelaria.Domain.Tarefa.Dto;
 using ProjetoBanco.Infra.Data.Repositories;
 using System;
 using System.Collections.Generic;
@@ -8,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace _5_Pastelaria.Repository.Repositories
 {
-    public class TarefaRepository
+    public class TarefaRepository : ITarefaRepository
     {
-        private readonly Conexao conexao;
+        private readonly Conexao _conexao;
 
-        public TarefaRepository()
+        public TarefaRepository(Conexao conexao)
         {
-            conexao = new Conexao();
+            _conexao = conexao;
         }
 
         private enum Procedures
@@ -27,29 +28,29 @@ namespace _5_Pastelaria.Repository.Repositories
 
         public int Post(TarefaDto tarefa)
         {
-            conexao.ExecuteProcedure(Procedures.PSP_InsTarefa);
-            conexao.AddParameter("@IdGestor", tarefa.IdGestor);
-            conexao.AddParameter("@IdUsuario", tarefa.IdUsuario);
-            conexao.AddParameter("@TarefaDescricao", tarefa.TarefaDescricao);
-            conexao.AddParameter("@DataAgendamento", tarefa.DataAgendamento);
-            conexao.AddParameter("@DataLimiteExecucao", tarefa.DataLimiteExecucao);
-            conexao.AddParameter("@DataExecucao", tarefa.DataExecucao);
+            _conexao.ExecuteProcedure(Procedures.PSP_InsTarefa);
+            _conexao.AddParameter("@IdGestor", tarefa.IdGestor);
+            _conexao.AddParameter("@IdUsuario", tarefa.IdUsuario);
+            _conexao.AddParameter("@TarefaDescricao", tarefa.TarefaDescricao);
+            _conexao.AddParameter("@DataAgendamento", tarefa.DataAgendamento);
+            _conexao.AddParameter("@DataLimiteExecucao", tarefa.DataLimiteExecucao);
+            _conexao.AddParameter("@DataExecucao", tarefa.DataExecucao);
 
-            return conexao.ExecuteNonQueryWithReturn();
+            return _conexao.ExecuteNonQueryWithReturn();
         }
 
         public void PutDataExecucao(int id)
         {
-            conexao.ExecuteProcedure(Procedures.PSP_UpdDataExecucaoTarefa);
-            conexao.AddParameter("@Id", id);
-            conexao.ExecuteNonQuery();
+            _conexao.ExecuteProcedure(Procedures.PSP_UpdDataExecucaoTarefa);
+            _conexao.AddParameter("@Id", id);
+            _conexao.ExecuteNonQuery();
         }
 
         public TarefaDto GetTarefaPorId(int id)
         {
-            conexao.ExecuteProcedure(Procedures.PSP_SelTarefaPorId);
-            conexao.AddParameter("@Id", id);
-            using (var r = conexao.ExecuteReader())
+            _conexao.ExecuteProcedure(Procedures.PSP_SelTarefaPorId);
+            _conexao.AddParameter("@Id", id);
+            using (var r = _conexao.ExecuteReader())
             {
                 if (r.Read())
                 {

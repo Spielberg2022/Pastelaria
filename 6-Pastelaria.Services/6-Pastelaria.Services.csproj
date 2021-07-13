@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IDisparoEmailService.cs" />
+    <Compile Include="ITarefaService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DisparoEmailService.cs" />
     <Compile Include="Services\TarefaService.cs" />

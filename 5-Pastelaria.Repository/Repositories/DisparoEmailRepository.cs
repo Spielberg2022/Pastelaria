@@ -1,4 +1,5 @@
-﻿using Pastelaria.Domain.DisparoEmail.Dto;
+﻿using Pastelaria.Domain.DisparoEmail;
+using Pastelaria.Domain.DisparoEmail.Dto;
 using ProjetoBanco.Infra.Data.Repositories;
 using System;
 using System.Collections.Generic;
@@ -8,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace _5_Pastelaria.Repository.Repositories
 {
-    public class DisparoEmailRepository
+    public class DisparoEmailRepository : IDisparoEmailRepository
     {
-        private readonly Conexao conexao;
+        private readonly Conexao _conexao;
 
-        public DisparoEmailRepository()
+        public DisparoEmailRepository(Conexao conexao)
         {
-            conexao = new Conexao();
+            _conexao = conexao;
         }
 
         private enum Procedures
@@ -26,21 +27,21 @@ namespace _5_Pastelaria.Repository.Repositories
 
         public void Post(DisparoEmailDto disparoEmail)
         {
-            conexao.ExecuteProcedure(Procedures.PSP_InsDisparoEmail);
-            conexao.AddParameter("@IdTarefa", disparoEmail.IdTarefa);
-            conexao.AddParameter("@IdUsuarioDestinatario", disparoEmail.IdUsuarioDestinatario);
-            conexao.AddParameter("@CodigoTipoEmail", disparoEmail.CodigoTipoEmail);
-            conexao.AddParameter("@Mensagem", disparoEmail.Mensagem);
-            conexao.AddParameter("@Assunto", disparoEmail.Assunto);
-            conexao.AddParameter("@Email", disparoEmail.Email);
-            conexao.ExecuteNonQuery();
+            _conexao.ExecuteProcedure(Procedures.PSP_InsDisparoEmail);
+            _conexao.AddParameter("@IdTarefa", disparoEmail.IdTarefa);
+            _conexao.AddParameter("@IdUsuarioDestinatario", disparoEmail.IdUsuarioDestinatario);
+            _conexao.AddParameter("@CodigoTipoEmail", disparoEmail.CodigoTipoEmail);
+            _conexao.AddParameter("@Mensagem", disparoEmail.Mensagem);
+            _conexao.AddParameter("@Assunto", disparoEmail.Assunto);
+            _conexao.AddParameter("@Email", disparoEmail.Email);
+            _conexao.ExecuteNonQuery();
         }
 
         public DisparoEmailDto GetDisparoEmailPorIdTarefa(int idTarefa)
         {
-            conexao.ExecuteProcedure(Procedures.PSP_SelDisparoEmailPorIdTarefa);
-            conexao.AddParameter("@IdTarefa", idTarefa);
-            using (var r = conexao.ExecuteReader())
+            _conexao.ExecuteProcedure(Procedures.PSP_SelDisparoEmailPorIdTarefa);
+            _conexao.AddParameter("@IdTarefa", idTarefa);
+            using (var r = _conexao.ExecuteReader())
             {
                 if (r.Read())
                 {

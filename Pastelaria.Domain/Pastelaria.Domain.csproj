@@ -48,11 +48,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DisparoEmail\Dto\DisparoEmailDto.cs" />
+    <Compile Include="DisparoEmail\IDisparoEmailRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tarefa\Dto\TarefaDto.cs" />
+    <Compile Include="Tarefa\ITarefaRepository.cs" />
     <Compile Include="TipoEmail\Dto\TipoEmail.cs" />
     <Compile Include="TipoUsuario\Dto\TipoUsuarioDto.cs" />
     <Compile Include="Usuario\Dto\UsuarioDto.cs" />
+    <Compile Include="Usuario\IUsuarioRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
