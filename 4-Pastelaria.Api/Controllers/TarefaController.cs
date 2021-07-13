@@ -57,12 +57,12 @@ namespace _4_Pastelaria.Api.Controllers
                 return BadRequest("Falha ao inserir tarefa!" + ex.Message);
             }
         }
-        
+
         /// <summary>
         /// Método que chama o serviço para atualizar a data de execução da tarefa
         /// </summary>
-        /// <param name="tarefaDto">Dados da tarefa</param>
-        /// <returns>Se a atualização for bem sucedida retorna um status ok</returns>
+        /// <param name="id">Identificador da tarefa que deseja finalizar</param>
+        /// <returns></returns>
         [HttpPut,Route("finalizar-tarefa/{id}")]
         public IHttpActionResult PutDataExecucao(int id)
         {
@@ -73,7 +73,6 @@ namespace _4_Pastelaria.Api.Controllers
             }
             catch (Exception ex)
             {
-
                 return BadRequest("Falha ao finalizar tarefa!" + ex.Message);
             }
         }

@@ -97,7 +97,6 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[PSP_UpdDat
 GO
 
 CREATE PROCEDURE [dbo].[PSP_UpdDataExecucaoTarefa]
-	@DataExecucao date = null,
 	@Id int
 	AS
 
@@ -107,14 +106,17 @@ CREATE PROCEDURE [dbo].[PSP_UpdDataExecucaoTarefa]
 	Objetivo..........: Atualiza a data da execução da tabela Tarefa.
 	Autor.............: SMN - Wesley Silveira
  	Data..............: 12/07/2021
-	Ex................: EXEC [dbo].[PSP_UpdDataExecucaoTarefa]
+	Ex................: BEGIN TRANSACTION
+							EXEC [dbo].[PSP_UpdDataExecucaoTarefa]30
+							SELECT * FROM Tarefa 
+						ROLLBACK TRANSACTION
 
 	*/
 
 	BEGIN;
 
 		UPDATE Tarefa
-			SET DataExecucao = @DataExecucao
+			SET DataExecucao = CAST(GETDATE() AS DATE)
 			WHERE Id = @Id
 
 	END;
