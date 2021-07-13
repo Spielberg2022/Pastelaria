@@ -13,15 +13,15 @@ namespace _6_Pastelaria.Services.Services
     public class TarefaService
     {
         private readonly TarefaRepository _tarefaRepository;
-        private readonly DisparoEmailRepository _disparoEmailrepository;
         private readonly UsuarioRepository _usuarioRepository;
+        private readonly DisparoEmailRepository _disparoEmailRepository;
         private readonly DisparoEmailService _disparoEmailService;
 
         public TarefaService()
         {
             _tarefaRepository = new TarefaRepository();
-            _disparoEmailrepository = new DisparoEmailRepository();
             _usuarioRepository = new UsuarioRepository();
+            _disparoEmailRepository = new DisparoEmailRepository();
             _disparoEmailService = new DisparoEmailService();
         }
 
@@ -44,23 +44,23 @@ namespace _6_Pastelaria.Services.Services
             return string.Empty;
         }
 
-        public string PostExecutar(TarefaDto tarefaDto)
+        public void PutDataExecucao(int id)
         {
-            _tarefaRepository.PostExecutar(tarefaDto);
+            _tarefaRepository.PutDataExecucao(id);
 
-            var usuario = _usuarioRepository.GetUsuarioPorId(tarefaDto.IdGestor);
+            var tarefa = _tarefaRepository.GetTarefaPorId(id);
+            var disparoEmail = _disparoEmailRepository.GetDisparoEmailPorIdTarefa(id);
+            var usuario = _usuarioRepository.GetUsuarioPorId(tarefa.IdGestor);
 
             _disparoEmailService.Post(new Pastelaria.Domain.DisparoEmail.Dto.DisparoEmailDto
             {
-                IdTarefa = tarefaDto.Id,
-                IdUsuarioDestinatario = tarefaDto.IdGestor,
+                IdTarefa = tarefa.Id,
+                IdUsuarioDestinatario = tarefa.IdGestor,
                 CodigoTipoEmail = 2,
-                Mensagem = "Tarefa Id: '"+ tarefaDto.Id + "' Assunto:'"+ tarefaDto.Assunto +"' concluída.",
-                Assunto = tarefaDto.Assunto,
+                Mensagem = "Tarefa Id: '"+ tarefa.Id + "' Assunto:'"+ disparoEmail.Assunto +"' concluída.",
+                Assunto = "Tarefa concluída",
                 Email = usuario.Email
             });
-
-            return string.Empty;
         }
     }
 }

@@ -35,22 +35,5 @@ namespace _4_Pastelaria.Api.Controllers
                 return BadRequest("Falha ao localizar usuário por IdTarefa!" + ex.Message);
             }
         }
-
-        public IHttpActionResult Post(DisparoEmailDto disparoEmail, UsuarioDto usuario)
-        {
-            try
-            {
-                var retorno = _disparoEmailService.Post(disparoEmail);
-                if (!string.IsNullOrEmpty(retorno))
-                {
-                    return BadRequest(retorno);
-                }
-                return Ok(usuario);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest("Falha ao inserir usuário!" + ex.Message);
-            }
-        }
     }
 }

@@ -38,11 +38,10 @@ namespace _5_Pastelaria.Repository.Repositories
             return conexao.ExecuteNonQueryWithReturn();
         }
 
-        public void PostExecutar(TarefaDto tarefaDto)
+        public void PutDataExecucao(int id)
         {
             conexao.ExecuteProcedure(Procedures.PSP_UpdDataExecucaoTarefa);
-            conexao.AddParameter("@DataExecucao", tarefaDto.DataExecucao);
-            conexao.AddParameter("@Id", tarefaDto.Id);
+            conexao.AddParameter("@Id", id);
             conexao.ExecuteNonQuery();
         }
 
@@ -54,6 +53,16 @@ namespace _5_Pastelaria.Repository.Repositories
             {
                 if (r.Read())
                 {
+                    DateTime dataExecucao;
+                    try
+                    {
+                        dataExecucao = Convert.ToDateTime(r["DataExecucao"]?.ToString());
+                    }
+                    catch (Exception)
+                    {
+                        dataExecucao = Convert.ToDateTime("1900-01-01");
+                    }
+
                     return new TarefaDto
                     {
                         Id = int.Parse(r["Id"].ToString()),
@@ -62,7 +71,7 @@ namespace _5_Pastelaria.Repository.Repositories
                         TarefaDescricao = r["TarefaDescricao"].ToString(),
                         DataAgendamento = DateTime.Parse(r["DataAgendamento"].ToString()),
                         DataLimiteExecucao = DateTime.Parse(r["DataLimiteExecucao"].ToString()),
-                        DataExecucao = DateTime.Parse(r["DataExecucao"].ToString())
+                        DataExecucao = dataExecucao
                     };
                 }
             }

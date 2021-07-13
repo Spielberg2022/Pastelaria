@@ -22,6 +22,12 @@ namespace _4_Pastelaria.Api.Controllers
             _usuarioService = new UsuarioService();
         }
 
+        /// <summary>
+        /// Método que faz o login no sitema.
+        /// </summary>
+        /// <param name="email">Email do login do usuário</param>
+        /// <param name="senha">Senha do login do usuário</param>
+        /// <returns>Se login e senha foram válidos retorna o objeto usuário</returns>
         public IHttpActionResult GetLogin(string email, string senha)
         {
             try
@@ -35,6 +41,11 @@ namespace _4_Pastelaria.Api.Controllers
             }
         }
         
+        /// <summary>
+        /// Método que insere um novo usuário
+        /// </summary>
+        /// <param name="usuario">Objeto que recebe os dados do usuário a ser inserido</param>
+        /// <returns>Se for inserido com sucesso retorna os dados do usuário</returns>
         public IHttpActionResult Post(UsuarioDto usuario)
         {
             try

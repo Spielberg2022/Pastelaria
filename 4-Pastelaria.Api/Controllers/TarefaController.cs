@@ -14,16 +14,19 @@ namespace _4_Pastelaria.Api.Controllers
     public class TarefaController : ApiController
     {
         private readonly TarefaRepository _tarefaRepository;
-        private readonly DisparoEmailRepository _disparoEmailRepository;
         private readonly TarefaService _tarefaService;
 
         public TarefaController()
         {
             _tarefaRepository = new TarefaRepository();
-            _disparoEmailRepository = new DisparoEmailRepository();
             _tarefaService = new TarefaService();
         }
 
+        /// <summary>
+        /// Método que obtém os dados da tarefa de acordo com sua Id
+        /// </summary>
+        /// <param name="id">Id da tarefa a ser retornada</param>
+        /// <returns>Se id existe retona os dados da tarefa</returns>
         public IHttpActionResult GetTarefaPorId(int id)
         {
             try
@@ -37,6 +40,11 @@ namespace _4_Pastelaria.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Médoto que chama o serviço para iserir os dados da tarefa
+        /// </summary>n
+        /// <param name="tarefaDto">Parametros com os dados da tarefa</param>
+        /// <returns>Se a inserção for bem sucedida retorna um status ok</returns>
         public IHttpActionResult Post(TarefaDto tarefaDto)
         {
             try
@@ -50,11 +58,17 @@ namespace _4_Pastelaria.Api.Controllers
             }
         }
         
-        public IHttpActionResult PostDataExecucao(TarefaDto tarefaDto)
+        /// <summary>
+        /// Método que chama o serviço para atualizar a data de execução da tarefa
+        /// </summary>
+        /// <param name="tarefaDto">Dados da tarefa</param>
+        /// <returns>Se a atualização for bem sucedida retorna um status ok</returns>
+        [HttpPut,Route("finalizar-tarefa/{id}")]
+        public IHttpActionResult PutDataExecucao(int id)
         {
             try
             {
-                var tarefa = _tarefaService.PostExecutar(tarefaDto);
+                _tarefaService.PutDataExecucao(id);
                 return Ok();
             }
             catch (Exception ex)

@@ -50,6 +50,15 @@ namespace _5_Pastelaria.Repository
             {
                 if (r.Read())
                 {
+                    DateTime dataNascimento;
+                    try
+                    {
+                        dataNascimento = Convert.ToDateTime(r["DataNascimento"].ToString());
+                    }
+                    catch (Exception)
+                    {
+                        dataNascimento = Convert.ToDateTime("1900-01-01");
+                    }
                     return new UsuarioDto
                     {
                         Id = int.Parse(r["Id"].ToString()),
@@ -57,7 +66,7 @@ namespace _5_Pastelaria.Repository
                         Email = r["Email"].ToString(),
                         Senha = r["Senha"].ToString(),
                         Nome = r["Nome"].ToString(),
-                        DataNascimento = DateTime.Parse(r["DataNascimento"].ToString()),
+                        DataNascimento = dataNascimento,
                         Telefonefixo = r["TelefoneFixo"].ToString(),
                         TelefoneCelular = r["TelefoneCelular"].ToString(),
                         Logradouro = r["Logradouro"].ToString(),
