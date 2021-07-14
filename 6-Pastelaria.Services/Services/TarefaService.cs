@@ -61,7 +61,7 @@ namespace _6_Pastelaria.Services.Services
                 IdUsuarioDestinatario = tarefa.IdGestor,
                 CodigoTipoEmail = 2,
                 Assunto = "Tarefa concluída",
-                Mensagem = "Tarefa Id: '"+ tarefa.Id + "' Assunto:'Tarefa concluída' concluída.",
+                Mensagem = "Tarefa Id: '"+ tarefa.Id + "' Descrição:'" + tarefa.TarefaDescricao + "' concluída.",
                 Email = usuario.Email
             });
         }

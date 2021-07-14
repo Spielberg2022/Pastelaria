@@ -64,7 +64,7 @@ namespace _4_Pastelaria.Api.Controllers
         /// Método que chama o serviço para atualizar a data de execução da tarefa
         /// </summary>
         /// <param name="id">Identificador da tarefa que deseja finalizar</param>
-        /// <returns></returns>
+        /// <returns>Se a execução for bem sucedida retorna um status de ok</returns>
         [HttpPut,Route("finalizar-tarefa/{id}")]
         public IHttpActionResult PutDataExecucao(int id)
         {
