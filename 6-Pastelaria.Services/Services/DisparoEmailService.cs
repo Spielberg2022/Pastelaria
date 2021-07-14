@@ -46,7 +46,7 @@ namespace Pastelaria.Services.Services
             }
             catch (Exception ex)
             {
-                throw;
+                return ex.Message;
             }
 
             return string.Empty;

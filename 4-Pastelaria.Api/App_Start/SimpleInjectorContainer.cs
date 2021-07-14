@@ -5,6 +5,7 @@ using _6_Pastelaria.Services.Services;
 using Pastelaria.Domain.DisparoEmail;
 using Pastelaria.Domain.Tarefa;
 using Pastelaria.Domain.Usuario;
+using Pastelaria.Domain.Usuario.Services;
 using Pastelaria.Services.Services;
 using ProjetoBanco.Infra.Data.Repositories;
 using SimpleInjector;
@@ -26,10 +27,12 @@ namespace _4_Pastelaria.Api.App_Start
             container.Register<IUsuarioRepository, UsuarioRepository>();
             container.Register<ITarefaRepository, TarefaRepository>();
             container.Register<IDisparoEmailRepository, DisparoEmailRepository>();
+            
 
             //Services
             container.Register<ITarefaService, TarefaService>();
             container.Register<IDisparoEmailService, DisparoEmailService>();
+            container.Register<IUsuarioService, UsuarioService>();
 
             container.Register<Conexao>(Lifestyle.Scoped);
 

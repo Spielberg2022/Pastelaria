@@ -1,4 +1,5 @@
 ﻿using _5_Pastelaria.Repository;
+using _6_Pastelaria.Services;
 using Pastelaria.Domain.Usuario;
 using Pastelaria.Domain.Usuario.Dto;
 using Pastelaria.Domain.Usuario.Services;
@@ -14,14 +15,13 @@ namespace _4_Pastelaria.Api.Controllers
     [RoutePrefix("api/Usuario")]
     public class UsuarioController : ApiController
     {
-        private readonly UsuarioRepository _usuarioRepository;
-        private readonly UsuarioService _usuarioService;
-
         private readonly IUsuarioRepository _iUsuarioRespository;
+        private readonly IUsuarioService _iUsuarioService;
 
-        public UsuarioController(IUsuarioRepository iUsuarioRespository)
+        public UsuarioController(IUsuarioRepository iUsuarioRespository, IUsuarioService iUsuarioService)
         {
             _iUsuarioRespository = iUsuarioRespository;
+            _iUsuarioService = iUsuarioService;
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace _4_Pastelaria.Api.Controllers
         {
             try
             {
-                var retorno = _usuarioService.Post(usuario);
+                var retorno = _iUsuarioService.Post(usuario);
                 if(!string.IsNullOrEmpty(retorno))
                 {
                     return BadRequest(retorno);

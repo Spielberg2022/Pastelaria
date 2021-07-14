@@ -39,7 +39,7 @@ namespace _6_Pastelaria.Services.Services
                 IdTarefa = idTarefa,
                 IdUsuarioDestinatario = tarefaDto.IdUsuario,
                 CodigoTipoEmail = 1,
-                Mensagem = tarefaDto.TarefaDescricao,
+                Mensagem = tarefaDto.TarefaDescricao + " Tarefa expira em: " + tarefaDto.DataLimiteExecucao,
                 Assunto = tarefaDto.Assunto,
                 Email = usuario.Email
             });
@@ -60,8 +60,8 @@ namespace _6_Pastelaria.Services.Services
                 IdTarefa = tarefa.Id,
                 IdUsuarioDestinatario = tarefa.IdGestor,
                 CodigoTipoEmail = 2,
-                Mensagem = "Tarefa Id: '"+ tarefa.Id + "' Assunto:'"+ disparoEmail.Assunto +"' concluída.",
                 Assunto = "Tarefa concluída",
+                Mensagem = "Tarefa Id: '"+ tarefa.Id + "' Assunto:'Tarefa concluída' concluída.",
                 Email = usuario.Email
             });
         }

@@ -1,4 +1,5 @@
 ﻿using _5_Pastelaria.Repository;
+using _6_Pastelaria.Services;
 using Pastelaria.Domain.Usuario.Dto;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 namespace Pastelaria.Domain.Usuario.Services
 {
 
-    public class UsuarioService
+    public class UsuarioService : IUsuarioService
     {
         private readonly IUsuarioRepository _usuarioRepository;
 
