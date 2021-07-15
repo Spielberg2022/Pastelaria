@@ -167,6 +167,7 @@
     <Content Include="Views\Cadastro\CadastroUsuario.cshtml" />
     <Content Include="Views\Home\Principal.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\LoginPastelaria.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

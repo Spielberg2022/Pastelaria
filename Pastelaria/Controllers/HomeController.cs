@@ -10,9 +10,10 @@ namespace Pastelaria.Controllers
     public class HomeController : Controller
     {
         private readonly UsuarioDto usuario = new UsuarioDto();
+
         public ActionResult Index()
         {
-            return View();
+            return View("LoginPastelaria");
         }
 
         public ActionResult About()
@@ -37,10 +38,15 @@ namespace Pastelaria.Controllers
             return View();
         }
 
+        public ActionResult LoginPastelaria()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Principal(UsuarioDto usuario)
         {
-            if(true)
+            if (true)
             {
                 return View("Principal");
             }

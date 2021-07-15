@@ -1,13 +1,12 @@
 ﻿@model Pastelaria.Domain.Usuario.Dto.UsuarioDto
-    ViewBag.Title = "Login";
+@{
+    ViewBag.Title = "Tela de Login";
 }
 
-<h2>Login</h2>
 
 <form action="Home/Principal" method="POST">
     <fieldset>
         <legend> Entre com seu usuário e senha</legend>
-
         <div>
             @Html.LabelFor(x => x.Id)
         </div>
