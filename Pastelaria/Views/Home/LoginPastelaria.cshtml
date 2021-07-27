@@ -1,4 +1,4 @@
-﻿
+﻿@model Pastelaria.Domain.Usuario.Dto.UsuarioDto
 @{
     ViewBag.Title = "LoginPastelaria";
     Layout = null;
@@ -54,8 +54,14 @@
         <br /> <br />
         <input type="password" placeholder="Senha" />
         <br /> <br />
-        <button>Enviar</button>
+        <button id="btnEnviar">Enviar</button>
     </div>
+    <script>
+        $('#btnEnviar').on("click", enviar)
+        function enviar() {
+
+        }
+    </script>
 </body>
 
 

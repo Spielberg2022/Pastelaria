@@ -6,17 +6,22 @@ using System.Web.Mvc;
 
 namespace Pastelaria.Controllers
 {
-    public class CadastroController : Controller
+    public class UsuarioController : Controller
     {
         // GET: Cadastro
         public ActionResult Index()
         {
-            return View();
+            return View("");
         }
 
         public ActionResult CadastroUsuario()
         {
-            return View();
+            return View("");
+        }
+
+        public ActionResult CadastroUsuario2()
+        {
+            return View("");
         }
     }
 }
