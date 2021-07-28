@@ -1,0 +1,82 @@
+﻿
+
+@{
+    ViewBag.Title = "ListaTarefas";
+    Layout = null;
+}
+
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .tela-tarefas {
+        background-color: rgba(0,0,0,0.8);
+        position: absolute;
+        top: 30%;
+        left: 30%;
+        transform: translate(-20%, -20%);
+        padding: 80px;
+        border-radius: 15px;
+        color: white;
+    }
+    #btnCriarTarefa {
+        background-color: dodgerblue;
+        border: none;
+        padding: 15px;
+        width: 100%;
+        border-radius: 10px;
+        color: white;
+        font-size: 15px;
+        cursor: pointer;
+    }
+    #btnCriarTarefa:hover {
+        background-color: deepskyblue;
+    }
+    #Tarefas {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        #tarefas td, #tarefas th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #tarefas tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #tarefas tr:hover {
+            background-color: #ddd;
+        }
+
+        #tarefas th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+</style>
+<body>
+    <div class="tela-tarefas">
+        <h1>Lista de Tarefas</h1>
+        <table id="Tarefas">
+            <tr>
+                <th>ID</th>
+                <th>Gestor</th>
+                <th>Usuario</th>
+                <th>Descrição</th>
+                <th>Data de Agendamento</th>
+                <th>Data Limite de Execução</th>
+                <th>Data da Execução</th>
+                <th>Assunto</th>
+                <th>Mensagem</th>
+                <th>Finalizar</th>
+            </tr>
+        </table>
+        <br />
+        <button id="btnCriarTarefa">Criar Tarefa</button>
+    </div>
+</body>

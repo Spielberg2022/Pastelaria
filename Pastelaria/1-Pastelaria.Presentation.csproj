@@ -120,6 +120,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\TarefasController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -169,7 +170,8 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\LoginPastelaria.cshtml" />
     <Content Include="Views\Usuario\CadastroUsuario.cshtml" />
-    <Content Include="Views\Usuario\CadastroUsuario2.cshtml" />
+    <Content Include="Views\Tarefas\ListaTarefas.cshtml" />
+    <Content Include="Views\Tarefas\CriarTarefa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

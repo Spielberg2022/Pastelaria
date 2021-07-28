@@ -18,10 +18,5 @@ namespace Pastelaria.Controllers
         {
             return View("");
         }
-
-        public ActionResult CadastroUsuario2()
-        {
-            return View("");
-        }
     }
 }
