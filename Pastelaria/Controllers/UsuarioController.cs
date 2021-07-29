@@ -18,5 +18,9 @@ namespace Pastelaria.Controllers
         {
             return View("");
         }
+
+        public ActionResult Get(string senha) {
+            return RedirectToAction("CadastroUsuario");
+        }
     }
 }

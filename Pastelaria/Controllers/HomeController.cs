@@ -55,5 +55,11 @@ namespace Pastelaria.Controllers
                 return View("Login");
             }
         }
+
+        public ActionResult Get()
+        {
+            return View("Principal");
+
+        }
     }
 }

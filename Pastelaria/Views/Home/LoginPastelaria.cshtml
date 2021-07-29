@@ -7,7 +7,7 @@
 <head>
     <title>Tela de login</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jaquery/2.2.4/jquery.min.js"></script>
-    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -50,18 +50,28 @@
 <body>
     <div class="tela-login">
         <h1>Login</h1>
-        <input type="text" placeholder="E-mail" />
+        <input type="text" placeholder="E-mail" id="email" required/>
         <br /> <br />
-        <input type="password" placeholder="Senha" />
+        <input type="password" placeholder="Senha" id="senha" required/>
         <br /> <br />
         <button id="btnEnviar">Enviar</button>
     </div>
-    
+
     <script>
-        $('#btnEnviar').on("click", enviar)
-        function enviar() {
-            alert("Enviar detectado");
-        }
+        var url = {
+            get: '@Url.Action("Get", "Tarefas")',
+            getUsuario : ''
+        };
+
+        $("#btnEnviar").click(function () {
+            debugger;
+            $.get(url.get,
+                {
+                    email: $("#email").val(),
+                    senha: $("#senha").val()
+                }, function (data) {
+            });
+        });
     </script>
 </body>
 

@@ -167,7 +167,6 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Principal.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\LoginPastelaria.cshtml" />
     <Content Include="Views\Usuario\CadastroUsuario.cshtml" />
     <Content Include="Views\Tarefas\ListaTarefas.cshtml" />

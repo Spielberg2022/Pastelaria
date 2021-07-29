@@ -5,6 +5,7 @@
 }
 
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -27,6 +28,7 @@
             outline: none;
             font-size: 15px;
         }
+
         #btnCriarTarefa {
             background-color: dodgerblue;
             border: none;
@@ -38,17 +40,20 @@
             cursor: pointer;
         }
 
-        #btnCriarTarefa:hover {
-            background-color: deepskyblue;
-        }
-        #Usuario{
+            #btnCriarTarefa:hover {
+                background-color: deepskyblue;
+            }
+
+        #Usuario {
             width: 270px;
             padding: 6px;
         }
-        #Descricao{
+
+        #Descricao {
             height: 120px;
             width: 300px;
         }
+
         #Mensagem {
             height: 120px;
             width: 300px;
@@ -83,9 +88,28 @@
         </div>
         <br />
         <div>
-            <input id="btnCriarTarefa" type="button" value="Atribuir Tarefa" />
+            <button id="btnCriarTarefa">Atribuir Tarefa</button>
         </div>
     </div>
+    <script>
+        var url = {
+            get: '@Url.Action("GetCriarTarefa", "Tarefas")',
+            getUsuario : ''
+        };
+
+        $("#btnCriarTarefa").click(function () {
+            alert("teste")
+            debugger;
+            $.get(url.get,
+                {
+                    idUsuario: $("#Usuario").val(),
+                    descricao: $("#Descricao").val(),
+                    dataLimiteExecucao: $("#DataLimiteExecucao").val(),
+                    mensagem: $("#Mensagem").val()
+                }, function (data) {
+            });
+        });
+    </script>
 </body>
 
 

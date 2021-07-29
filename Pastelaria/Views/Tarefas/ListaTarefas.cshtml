@@ -77,6 +77,10 @@
             </tr>
         </table>
         <br />
-        <button id="btnCriarTarefa">Criar Tarefa</button>
+        @*<button id="btnCriarTarefa">Criar Tarefa</button>*@
+        @using (Html.BeginForm("CriarTarefa", "Tarefas", FormMethod.Get))
+        {
+            <button type="submit" name="btnCriarTarefa" id="btnCriarTarefa">Criar Tarefa</button>
+        }
     </div>
 </body>

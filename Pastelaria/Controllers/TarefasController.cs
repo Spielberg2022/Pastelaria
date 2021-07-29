@@ -23,5 +23,15 @@ namespace Pastelaria.Controllers
         {
             return View();
         }
+
+        public ActionResult Get(string email, string senha)
+        {
+            return RedirectToAction("ListaTarefas");
+        }
+
+        public ActionResult GetCriarTarefa(string idUsuario, string descricao, string dataLimiteExecucao, string mensagem)
+        {
+            return RedirectToAction("CriarTarefa");
+        }
     }
 }
