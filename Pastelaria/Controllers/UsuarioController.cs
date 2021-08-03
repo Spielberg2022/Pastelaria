@@ -22,5 +22,11 @@ namespace Pastelaria.Controllers
         public ActionResult Get(string senha) {
             return RedirectToAction("CadastroUsuario");
         }
+
+        public ActionResult CriarUsuario(string tipoUsuario, string email, string senha, string nome, string dataNascimento,
+            string telefoneFixo, string telefoneCelular, string logradouro, string bairro, string cidade, string uf, string cep, string foto)
+        {
+            return RedirectToAction("CadastroUsuario");
+        }
     }
 }

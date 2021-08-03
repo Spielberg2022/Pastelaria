@@ -5,6 +5,8 @@
 }
 
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jaquery/2.2.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -97,8 +99,8 @@
         <div>
             <label for="TipoUsuario">Tipo Usuário:</label>
             <select id="TipoUsuario">
-                <option></option>
-
+                <option value="1">Gestor</option>
+                <option value="2">Usuário</option>
             </select>
         </div>
         <br />
@@ -124,9 +126,9 @@
         <br />
         <div>
             <label for="telefone">Telefone fixo: </label>
-            <input type="tel" id="telefone" name="telefone" placeholder="(99)9999-8888" pattern="([0-9]{2})[0-9]{4}-[0-9]{4}">
+            <input type="tel" id="telefoneFixo" name="telefoneFixo" placeholder="(99)9999-8888" pattern="([0-9]{2})[0-9]{4}-[0-9]{4}">
             <label for="telefone">Celular: </label>
-            <input type="tel" id="celular" name="celular" placeholder="(99)99999-8888" pattern="([0-9]{2})[0-9]{5}-[0-9]{4}">
+            <input type="tel" id="telefoneCelular" name="telefoneCelular" placeholder="(99)99999-8888" pattern="([0-9]{2})[0-9]{5}-[0-9]{4}">
         </div>
         <br />
         <div>
@@ -174,9 +176,36 @@
         </div>
         <br />
         <div>
-            <input id="btnInserir" type="button" value="Inserir" />
+            <button id="btnInserir">Inserir</button>
         </div>
     </div>
+    <script>
+        var url = {
+            get: '@Url.Action("CriarUsuario", "Usuario")',
+            getUsuario : ''
+        };
+
+        $("#btnInserir").click(function () {
+            debugger;
+            $.get(url.get,
+                {
+                    tipoUsuario: $("#TipoUsuario").val(),
+                    email: $("#Email").val(),
+                    senha: $("#Senha").val(),
+                    nome: $("#Nome").val(),
+                    dataNascimento: $("#DataNascimento").val(),
+                    telefoneFixo: $("#TelefoneFixo").val(),
+                    telefoneCelular: $("#TelefoneCelular").val(),
+                    logradouro: $("#Logradouro").val(),
+                    bairro: $("#Bairro").val(),
+                    cidade: $("#Cidade").val(),
+                    uf: $("#Uf").val(),
+                    cep: $("#Cep").val(),
+                    foto: $("#Foto").val()
+                }, function (data) {
+            });
+        });
+    </script>
 </body>
 
 
