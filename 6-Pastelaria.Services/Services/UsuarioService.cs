@@ -19,6 +19,20 @@ namespace Pastelaria.Domain.Usuario.Services
             _usuarioRepository = usuarioRepository;
         }
 
+        public string Delete(int idUsuario)
+        {
+            var usuario = _usuarioRepository.GetUsuarioPorId(idUsuario);
+
+            if(usuario == null)
+            {
+                return "Usuário não encotrado!";
+            }
+
+            _usuarioRepository.Delete(usuario.Id);
+
+            return string.Empty;
+        }
+
         public string Post(UsuarioDto usuarioDto)
         {
             var usuario = _usuarioRepository.GetUsuarioPorEmail(usuarioDto.Email);

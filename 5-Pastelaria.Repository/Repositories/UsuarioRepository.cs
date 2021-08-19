@@ -21,12 +21,13 @@ namespace _5_Pastelaria.Repository
             PSP_InsUsuario,
             PSP_SelUsuarioPorEmail,
             PSP_SelEmailUsuarioPorId,
-            PSP_SelUsuarioPorId
+            PSP_SelUsuarioPorId,
+            PSP_DeleteUsuarioPorId
         }
 
         public UsuarioDto GetLogin(string email, string senha)
         {
-            var usuario = new UsuarioDto();
+            //var usuario = new UsuarioDto();
             _conexao.ExecuteProcedure(Procedures.PSP_SelUsuarioPorEmaileSenha);
             _conexao.AddParameter("@email", email);
             _conexao.AddParameter("@senha", senha);
@@ -34,13 +35,26 @@ namespace _5_Pastelaria.Repository
             {
                 if (r.Read())
                 {
-                    usuario.Id = int.Parse(r["Id"].ToString());
-                    usuario.Nome = r["Nome"].ToString();
-                    usuario.Email = r["Email"].ToString();
-                    usuario.Senha = r["Senha"].ToString();
+                    DateTime dataNascimento;
+                    try
+                    {
+                        dataNascimento = Convert.ToDateTime(r["DataNascimento"].ToString());
+                    }
+                    catch (Exception)
+                    {
+                        dataNascimento = Convert.ToDateTime("1900-01-01");
+                    }
+
+                    return new UsuarioDto
+                    {
+                        Id = int.Parse(r["Id"].ToString()),
+                        Nome = r["Nome"].ToString(),
+                        Email = r["Email"].ToString(),
+                        Senha = r["Senha"].ToString()
+                    };
                 }
             }
-            return usuario;
+            return null;
         }
 
         public UsuarioDto GetUsuarioPorId(int idUsuario)
@@ -60,6 +74,7 @@ namespace _5_Pastelaria.Repository
                     {
                         dataNascimento = Convert.ToDateTime("1900-01-01");
                     }
+
                     return new UsuarioDto
                     {
                         Id = int.Parse(r["Id"].ToString()),
@@ -130,6 +145,13 @@ namespace _5_Pastelaria.Repository
                 }
             }
             return null;
+        }
+
+        public void Delete(int id)
+        {
+            _conexao.ExecuteProcedure(Procedures.PSP_DeleteUsuarioPorId);
+            _conexao.AddParameter("@Id", id);
+            _conexao.ExecuteNonQuery();
         }
     }
 }

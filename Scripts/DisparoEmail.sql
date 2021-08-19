@@ -53,8 +53,13 @@ CREATE PROCEDURE [dbo].[PSP_SelDisparoEmailPorId]
 		-- nolock em todas tabelas da proc
 		SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 
-		SELECT Id, IdTarefa, IdUsuarioDestinatario, CodigoTipoEmail, Mensagem, Assunto
-			FROM DisparoEmail
+		SELECT Id, 
+				IdTarefa, 
+				IdUsuarioDestinatario, 
+				CodigoTipoEmail, 
+				Mensagem, 
+				Assunto
+			FROM [dbo].[DisparoEmail]
 			WHERE Id = @Id
 
 	END;
@@ -84,8 +89,13 @@ CREATE PROCEDURE [dbo].[PSP_SelDisparoEmailPorIdTarefa]
 		-- nolock em todas tabelas da proc
 		SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 
-		SELECT Id, IdTarefa, IdUsuarioDestinatario, CodigoTipoEmail, Mensagem, Assunto
-			FROM DisparoEmail
+		SELECT Id, 
+				IdTarefa, 
+				IdUsuarioDestinatario, 
+				CodigoTipoEmail, 
+				Mensagem, 
+				Assunto
+			FROM [dbo].[DisparoEmail]
 			WHERE IdTarefa = @IdTarefa
 
 	END;

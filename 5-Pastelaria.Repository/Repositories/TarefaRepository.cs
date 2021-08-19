@@ -23,7 +23,9 @@ namespace _5_Pastelaria.Repository.Repositories
             PSP_InsTarefa,
             PSP_SelTarefaPorUsuario,
             PSP_SelTarefaPorId,
-            PSP_UpdDataExecucaoTarefa
+            PSP_UpdDataExecucaoTarefa,
+            PSP_DeleteTarefaPorId,
+            PSP_UpdSituacaoTarefa
         }
 
         public int Post(TarefaDto tarefa)
@@ -35,6 +37,7 @@ namespace _5_Pastelaria.Repository.Repositories
             _conexao.AddParameter("@DataAgendamento", tarefa.DataAgendamento);
             _conexao.AddParameter("@DataLimiteExecucao", tarefa.DataLimiteExecucao);
             _conexao.AddParameter("@DataExecucao", tarefa.DataExecucao);
+            _conexao.AddParameter("@Situacao", tarefa.Situacao);
 
             return _conexao.ExecuteNonQueryWithReturn();
         }
@@ -64,19 +67,36 @@ namespace _5_Pastelaria.Repository.Repositories
                         dataExecucao = Convert.ToDateTime("1900-01-01");
                     }
 
-                    return new TarefaDto
-                    {
-                        Id = int.Parse(r["Id"].ToString()),
-                        IdGestor = int.Parse(r["IdGestor"].ToString()),
-                        IdUsuario = int.Parse(r["IdUsuario"].ToString()),
-                        TarefaDescricao = r["TarefaDescricao"].ToString(),
-                        DataAgendamento = DateTime.Parse(r["DataAgendamento"].ToString()),
-                        DataLimiteExecucao = DateTime.Parse(r["DataLimiteExecucao"].ToString()),
-                        DataExecucao = dataExecucao
-                    };
+                    TarefaDto tarefa = new TarefaDto(int.Parse(r["Id"].ToString()), 
+                                                        int.Parse(r["IdGestor"].ToString()), 
+                                                        int.Parse(r["IdUsuario"].ToString()), 
+                                                        r["TarefaDescricao"].ToString(),
+                                                        DateTime.Parse(r["DataAgendamento"].ToString()), 
+                                                        DateTime.Parse(r["DataLimiteExecucao"].ToString()),
+                                                        dataExecucao,
+                                                        "",
+                                                        "",
+                                                        r["Situacao"].ToString());
+
+                    return tarefa;
                 }
             }
             return null;
+        }
+
+        public void Delete(int id)
+        {
+            _conexao.ExecuteProcedure(Procedures.PSP_DeleteTarefaPorId);
+            _conexao.AddParameter("@Id", id);
+            _conexao.ExecuteNonQuery();
+        }
+
+        public void PutSituacaoPorID(int idTarefa, string situacao)
+        {
+            _conexao.ExecuteProcedure(Procedures.PSP_UpdSituacaoTarefa);
+            _conexao.AddParameter("@Id", idTarefa);
+            _conexao.AddParameter("@Situacao", situacao);
+            _conexao.ExecuteNonQuery();
         }
     }
 }

@@ -11,5 +11,6 @@ namespace _6_Pastelaria.Services
     {
         string Post(TarefaDto tarefaDto);
         void PutDataExecucao(int id);
+        void Delete(int id);
     }
 }

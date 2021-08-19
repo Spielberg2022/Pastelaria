@@ -43,7 +43,7 @@ namespace _4_Pastelaria.Api.Controllers
         }
 
         /// <summary>
-        /// Médoto que chama o serviço para iserir os dados da tarefa
+        /// Médoto que chama o serviço para inserir os dados da tarefa
         /// </summary>n
         /// <param name="tarefaDto">Parametros com os dados da tarefa</param>
         /// <returns>Se a inserção for bem sucedida retorna um status ok</returns>
@@ -52,6 +52,8 @@ namespace _4_Pastelaria.Api.Controllers
             try
             {
                 var tarefa = _tarefaService.Post(tarefaDto);
+                if (!string.IsNullOrEmpty(tarefa))
+                    return BadRequest(tarefa);
                 return Ok();
             }
             catch (Exception ex)
@@ -71,6 +73,20 @@ namespace _4_Pastelaria.Api.Controllers
             try
             {
                 _tarefaService.PutDataExecucao(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Falha ao finalizar tarefa!" + ex.Message);
+            }
+        }
+
+        [HttpDelete, Route("deletar-tarefa/{id}")]
+        public IHttpActionResult DeleteTarefaPorId(int id)
+        {
+            try
+            {
+                _tarefaService.Delete(id);
                 return Ok();
             }
             catch (Exception ex)

@@ -24,9 +24,9 @@ CREATE PROCEDURE [dbo].[PSP_SelUsuarioPorEmaileSenha]
 		SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 
 		SELECT	Id,
+				CodigoTipoUsuario,
 				Nome,
-				Email,
-				Senha
+				Email
 			FROM [dbo].[Usuario]
 			WHERE Email = @email and
 				  Senha = @senha
@@ -34,62 +34,5 @@ CREATE PROCEDURE [dbo].[PSP_SelUsuarioPorEmaileSenha]
 	END;
 GO
 
-
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[PSP_NomeProcedure]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[PSP_NomeProcedure]
-GO
-
-CREATE PROCEDURE [dbo].[PSP_NomeProcedure]
-
-	AS
-
-	/*
-	Documentacao
-	Arquivo Fonte.....: ArquivoFonte.sql
-	Objetivo..........: Objetivo
-	Autor.............: SMN - Wesley Silveira
- 	Data..............: 01/01/2021
-	Ex................: EXEC [dbo].[PSP_NomeProcedure]
-
-	*/
-
-	BEGIN;
-
-		-- nolock em todas tabelas da proc
-		SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
-
-		
-
-	END;
-GO
-
-
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[PSP_SelectNome]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[PSP_SelectNome]
-GO
-
-CREATE PROCEDURE [dbo].[PSP_SelectNome]
-
-	AS
-
-	/*
-	Documentacao
-	Arquivo Fonte.....: ArquivoFonte.sql
-	Objetivo..........: Objetivo
-	Autor.............: SMN - Wesley Silveira
- 	Data..............: 01/01/2021
-	Ex................: EXEC [dbo].[PSP_SelectNome]
-
-	*/
-
-	BEGIN;
-
-		-- nolock em todas tabelas da proc
-		SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
-
-		
-
-	END;
-GO
 				
 				

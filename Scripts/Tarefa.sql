@@ -8,7 +8,8 @@ CREATE PROCEDURE [dbo].[PSP_InsTarefa]
 	@TarefaDescricao varchar(200) = null,
 	@DataAgendamento date = null,
 	@DataLimiteExecucao date = null,
-	@DataExecucao date = null
+	@DataExecucao date = null,
+	@Situacao varchar(20)
 	AS
 
 	/*
@@ -23,8 +24,10 @@ CREATE PROCEDURE [dbo].[PSP_InsTarefa]
 
 	BEGIN;
 
-		INSERT INTO Tarefa (IdGestor, IdUsuario, TarefaDescricao, DataAgendamento, DataLimiteExecucao, DataExecucao)
-			VALUES(@IdGestor,@IdUsuario,@TarefaDescricao,@DataAgendamento,@DataLimiteExecucao,@DataExecucao)
+		INSERT INTO [dbo].[Tarefa] (IdGestor, IdUsuario, TarefaDescricao, DataAgendamento, DataLimiteExecucao, DataExecucao, Situacao)
+			VALUES(@IdGestor,@IdUsuario,@TarefaDescricao,@DataAgendamento,@DataLimiteExecucao,@DataExecucao, @Situacao)
+
+		RETURN SCOPE_IDENTITY()
 
 	END;
 GO
@@ -53,7 +56,13 @@ CREATE PROCEDURE [dbo].[PSP_SelTarefaPorUsuario]
 		-- nolock em todas tabelas da proc
 		SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 
-		SELECT Id, IdGestor, IdUsuario, TarefaDescricao, DataAgendamento, DataLimiteExecucao, DataExecucao
+		SELECT Id, 
+				IdGestor, 
+				IdUsuario, 
+				TarefaDescricao, 
+				DataAgendamento, 
+				DataLimiteExecucao, 
+				DataExecucao
 			FROM [dbo].[Tarefa]
 			WHERE IdUsuario = @IdUsuario
 
@@ -84,8 +93,15 @@ CREATE PROCEDURE [dbo].[PSP_SelTarefaPorId]
 		-- nolock em todas tabelas da proc
 		SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 		
-		SELECT Id, IdGestor, IdUsuario, TarefaDescricao, DataAgendamento, DataLimiteExecucao, DataExecucao
-			FROM Tarefa
+		SELECT Id, 
+				IdGestor, 
+				IdUsuario, 
+				TarefaDescricao, 
+				DataAgendamento, 
+				DataLimiteExecucao, 
+				DataExecucao,
+				Situacao
+			FROM [dbo].[Tarefa]
 			WHERE Id = @Id
 
 	END;
@@ -115,9 +131,66 @@ CREATE PROCEDURE [dbo].[PSP_UpdDataExecucaoTarefa]
 
 	BEGIN;
 
-		UPDATE Tarefa
+		UPDATE [dbo].[Tarefa]
 			SET DataExecucao = CAST(GETDATE() AS DATE)
 			WHERE Id = @Id
+
+	END;
+GO
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[PSP_UpdSituacaoTarefa]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[PSP_UpdSituacaoTarefa]
+GO
+
+CREATE PROCEDURE [dbo].[PSP_UpdSituacaoTarefa]
+    @Id int,
+	@Situacao varchar(20) = NULL
+	AS
+
+	/*
+	Documentacao
+	Arquivo Fonte.....: Tarefa.sql
+	Objetivo..........: Cancela a tarefa mudando sua situação
+	Autor.............: SMN - Wesley Silveira
+ 	Data..............: 19/08/2021
+	Ex................: EXEC [dbo].[PSP_UpdSituacaoTarefa]
+
+	*/
+
+	BEGIN;
+		
+		UPDATE [dbo].[Tarefa]
+			SET Situacao = @Situacao
+			WHERE Id = @Id
+
+	END;
+GO
+				
+				
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[PSP_DeleteTarefaPorId]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[PSP_DeleteTarefaPorId]
+GO
+
+CREATE PROCEDURE [dbo].[PSP_DeleteTarefaPorId]
+@Id int
+	AS
+
+	/*
+	Documentacao
+	Arquivo Fonte.....: Tarefa.sql
+	Objetivo..........: Deletar tarefa pelo Id iformado
+	Autor.............: SMN - Wesley Silveira
+ 	Data..............: 19/08/2021
+	Ex................: EXEC [dbo].[PSP_DeleteTarefaPorId]
+
+	*/
+
+	BEGIN;
+
+		DELETE FROM [dbo].[Tarefa] 
+			WHERE Id = @Id;
 
 	END;
 GO

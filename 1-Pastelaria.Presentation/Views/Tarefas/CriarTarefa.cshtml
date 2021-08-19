@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "CriarTarefa";
+    Layout = null;
+}
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .criarTarefa {
+            background-color: rgba(0,0,0,0.8);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 80px;
+            border-radius: 15px;
+            color: white;
+        }
+
+        input {
+            padding: 6px;
+            border: none;
+            outline: none;
+            font-size: 15px;
+        }
+
+        #btnCriarTarefa {
+            background-color: dodgerblue;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 10px;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+            #btnCriarTarefa:hover {
+                background-color: deepskyblue;
+            }
+
+        #Usuario {
+            width: 270px;
+            padding: 6px;
+        }
+
+        #Descricao {
+            height: 120px;
+            width: 300px;
+        }
+
+        #Mensagem {
+            height: 120px;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="criarTarefa">
+        <h1>Atribuir Tarefa</h1>
+        <br />
+        <div>
+            <label for="Usuario">Usuário:</label>
+            <select id="Usuario">
+                <option></option>
+
+            </select>
+        </div>
+        <br />
+        <div>
+            <label for="Descricao">Descrição da tarefa:</label>
+            <textarea id="Descricao" name="Descricao"></textarea>
+        </div>
+        <br />
+        <div>
+            <label for="DataLimiteExecucao">Data limite de execução:</label>
+            <input type="date" id="DataLimiteExecucao" name="DataLimiteExecucao">
+        </div>
+        <br />
+        <div>
+            <label for="Mensagem">Mensagem:</label>
+            <textarea id="Mensagem" name="Mensagem"></textarea>
+        </div>
+        <br />
+        <div>
+            <button id="btnCriarTarefa">Atribuir Tarefa</button>
+        </div>
+    </div>
+    <script>
+        var url = {
+            get: '@Url.Action("GetCriarTarefa", "Tarefas")',
+            getUsuario : ''
+        };
+
+        $("#btnCriarTarefa").click(function () {
+            alert("teste")
+            debugger;
+            $.get(url.get,
+                {
+                    idUsuario: $("#Usuario").val(),
+                    descricao: $("#Descricao").val(),
+                    dataLimiteExecucao: $("#DataLimiteExecucao").val(),
+                    mensagem: $("#Mensagem").val()
+                }, function (data) {
+            });
+        });
+    </script>
+</body>
+
+

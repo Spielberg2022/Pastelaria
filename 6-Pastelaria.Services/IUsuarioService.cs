@@ -10,5 +10,6 @@ namespace _6_Pastelaria.Services
     public interface IUsuarioService
     {
         string Post(UsuarioDto usuarioDto);
+        string Delete(int idUsuario);
     }
 }

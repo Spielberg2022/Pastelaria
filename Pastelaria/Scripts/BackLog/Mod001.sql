@@ -33,6 +33,7 @@ CREATE TABLE [dbo].[Tarefa](
 	DataAgendamento date not null,
 	DataLimiteExecucao date not null,
 	DataExecucao date,
+	Situacao varchar(20),
 
 	CONSTRAINT Tarefa_Pk PRIMARY KEY(Id),
 	CONSTRAINT Usuario_Tarefa_Fk FOREIGN KEY(IdGestor) REFERENCES [dbo].[Usuario](Id),

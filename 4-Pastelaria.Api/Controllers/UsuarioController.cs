@@ -1,4 +1,5 @@
-﻿using _5_Pastelaria.Repository;
+﻿using _4_Pastelaria.Api.Models;
+using _5_Pastelaria.Repository;
 using _6_Pastelaria.Services;
 using Pastelaria.Domain.Usuario;
 using Pastelaria.Domain.Usuario.Dto;
@@ -30,18 +31,25 @@ namespace _4_Pastelaria.Api.Controllers
         /// <param name="email">Email do login do usuário</param>
         /// <param name="senha">Senha do login do usuário</param>
         /// <returns>Se login e senha foram válidos retorna o objeto usuário</returns>
-        public IHttpActionResult GetLogin(string email, string senha)
+        [HttpGet]
+        public IHttpActionResult Get()
         {
             try
             {
-                var usuario = _iUsuarioRespository.GetLogin(email, senha);
-                return Ok(usuario);
+                return Ok(new UsuarioModel
+                {
+                    Email = "",
+                    Senha = "",
+                    Id = 0
+                });
             }
             catch(Exception ex)
             {
                 return BadRequest("Falha ao fazer login!" + ex.Message);
             }
         }
+
+
         
         /// <summary>
         /// Método que insere um novo usuário
@@ -62,6 +70,23 @@ namespace _4_Pastelaria.Api.Controllers
             catch (Exception ex)
             {
                 return BadRequest("Falha ao inserir usuário!" + ex.Message);
+            }
+        }
+
+        public IHttpActionResult Delete(int idUsuario)
+        {
+            try
+            {
+                var retorno = _iUsuarioService.Delete(idUsuario);
+                if(!string.IsNullOrEmpty(retorno))
+                {
+                    return BadRequest(retorno);
+                }
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Falha ao deletar usuário!" + ex.Message);
             }
         }
     }

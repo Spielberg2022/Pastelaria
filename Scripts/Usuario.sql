@@ -68,7 +68,7 @@ CREATE PROCEDURE [dbo].[PSP_InsUsuario]
 
 	BEGIN;
 
-		INSERT INTO Usuario (CodigoTipoUsuario, Email, Senha, Nome, DataNascimento, 
+		INSERT INTO [dbo].[Usuario] (CodigoTipoUsuario, Email, Senha, Nome, DataNascimento, 
 							TelefoneFixo, TelefoneCelular, Logradouro, Bairro, Cidade, Uf, Cep, Foto)
 			VALUES (@CodigoTipoUsuario,@Email,@Senha,@Nome,@DataNascimento,
 					@TelefoneFixo,@TelefoneCelular,@Logradouro,@Bairro,@Cidade,@Uf,@Cep,@Foto)
@@ -100,8 +100,20 @@ CREATE PROCEDURE [dbo].[PSP_SelUsuarioPorEmail]
 		-- nolock em todas tabelas da proc
 		SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 
-		SELECT  Id, CodigoTipoUsuario, Email, Senha, Nome, DataNascimento, 
-				TelefoneFixo, TelefoneCelular, Logradouro, Bairro, Cidade, Uf, Cep, Foto
+		SELECT  Id, 
+				CodigoTipoUsuario, 
+				Email, 
+				Senha, 
+				Nome, 
+				DataNascimento, 
+				TelefoneFixo, 
+				TelefoneCelular, 
+				Logradouro, 
+				Bairro, 
+				Cidade, 
+				Uf, 
+				Cep, 
+				Foto
 			FROM [dbo].[Usuario]
 			WHERE Email = @Email
 
@@ -133,7 +145,7 @@ CREATE PROCEDURE [dbo].[PSP_SelEmailUsuarioPorId]
 		SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 
 		SELECT Email
-			FROM Usuario
+			FROM [dbo].[Usuario]
 			WHERE Id = @Id
 
 	END;
@@ -163,12 +175,51 @@ CREATE PROCEDURE [dbo].[PSP_SelUsuarioPorId]
 		-- nolock em todas tabelas da proc
 		SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 
-		SELECT Id, CodigoTipoUsuario, Email, Senha, Nome, DataNascimento, TelefoneFixo, TelefoneCelular, Logradouro, Bairro, Cidade, Uf, Cep, Foto
-			FROM Usuario
+		SELECT Id, 
+				CodigoTipoUsuario, 
+				Email, 
+				Senha, 
+				Nome, 
+				DataNascimento, 
+				TelefoneFixo, 
+				TelefoneCelular, 
+				Logradouro, 
+				Bairro, 
+				Cidade, 
+				Uf, 
+				Cep, 
+				Foto
+			FROM [dbo].[Usuario]
 			WHERE Id = @Id
 
 	END;
 GO
 								
 
-											
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[PSP_DeleteUsuarioPorId]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[PSP_DeleteUsuarioPorId]
+GO
+
+CREATE PROCEDURE [dbo].[PSP_DeleteUsuarioPorId]
+@Id int
+	AS
+
+	/*
+	Documentacao
+	Arquivo Fonte.....: Usuario.sql
+	Objetivo..........: Deleta o Usuário pelo Id informado
+	Autor.............: SMN - Wesley Silveira
+ 	Data..............: 19/08/2021
+	Ex................: EXEC [dbo].[PSP_DeleteUsuarioPorId]
+
+	*/
+
+	BEGIN;
+
+		DELETE FROM [dbo].[Usuario] 
+			WHERE Id = @Id;
+
+	END;
+GO
+												

@@ -1,0 +1,88 @@
+﻿@{
+    Layout = null;
+}
+
+<head>
+    <title>Tela de login</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jaquery/2.2.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        div {
+            background-color: rgba(0,0,0,0.8);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 80px;
+            border-radius: 15px;
+            color: white;
+        }
+
+        input {
+            padding: 15px;
+            border: none;
+            outline: none;
+            font-size: 15px;
+        }
+
+        button {
+            background-color: dodgerblue;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 10px;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: deepskyblue;
+            }
+    </style>
+</head>
+<body>
+    <form onsubmit="home.post(this); return false;" id="form">
+        <div class="tela-login">
+            <h1>Login</h1>
+            <input type="text" placeholder="E-mail" id="email" required />
+            <br /> <br />
+            <input type="password" placeholder="Senha" id="senha" required />
+            <br /> <br />
+            <button id="btnEnviar" type="submit">Enviar</button>
+        </div>
+    </form>
+    <script src="~/Lib/Home.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/plugins.js"></script>
+    <script>
+        @*var url = {
+            get: '@Url.Action("Get", "Usuario")',
+            getUsuario : ''
+        };
+
+        $("#btnEnviar").click(function () {
+            debugger;
+            $.get(url.get,
+                {
+                    email: $("#email").val(),
+                    senha: $("#senha").val()
+                }, function (data) {
+            });
+        });*@
+        home.init({
+            url: {
+                post: '@Url.Action("Post")',
+            }
+        });
+    </script>
+</body>
+
+
+
+

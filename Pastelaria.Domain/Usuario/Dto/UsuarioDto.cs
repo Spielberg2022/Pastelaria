@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pastelaria.Domain.Tarefa.Dto;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,37 +10,46 @@ namespace Pastelaria.Domain.Usuario.Dto
 {
     public class UsuarioDto
     {
-        [Display(Name = "Identificador")]
+        private IList<TarefaDto> _tarefaDtos;
+        //public UsuarioDto(int id, 
+        //                    int codigoTipoUsuario, 
+        //                    string email, 
+        //                    string senha, 
+        //                    string nome, 
+        //                    DateTime? dataNascimento, 
+        //                    string telefonefixo, 
+        //                    string telefoneCelular, 
+        //                    string logradouro, 
+        //                    string bairro, 
+        //                    string cidade, 
+        //                    string uf, 
+        //                    string cep, 
+        //                    string foto)
+        //{
+        //    Id = id;
+        //    CodigoTipoUsuario = codigoTipoUsuario;
+        //    Email = email;
+        //    Senha = senha;
+        //    Nome = nome;
+        //    DataNascimento = dataNascimento;
+        //    Telefonefixo = telefonefixo;
+        //    TelefoneCelular = telefoneCelular;
+        //    Logradouro = logradouro;
+        //    Bairro = bairro;
+        //    Cidade = cidade;
+        //    Uf = uf;
+        //    Cep = cep;
+        //    Foto = foto;
+        //    _tarefaDtos = new List<TarefaDto>();
+        //}
+
         public int Id { get; set; }
-
-        [Display(Name = "Tipo de Usuário")]
-        [Required(ErrorMessage = "O tipo de usuário é obrigatório")]
         public int CodigoTipoUsuario { get; set; }
-
-        [Display(Name = "E-mail")]
-        [Required(ErrorMessage = "Preencha o campo Email")]
-        [MaxLength(70, ErrorMessage = "Máximo {0} caracteres")]
-        [EmailAddress(ErrorMessage = "Preencha um e-mail válido")]
         public string Email { get; set; }
-
-        [Required(ErrorMessage = "A senha é obrigatória")]
-        [MaxLength(30, ErrorMessage = "Máximo {0} caracteres")]
         public string Senha { get; set; }
-
-        [Required(ErrorMessage = "O nome é obrigatório")]
-        [MaxLength(80, ErrorMessage = "Máximo {0} caracteres")]
-        [MinLength(2, ErrorMessage = "Mínimo {0} caracteres")]
         public string Nome { get; set; }
-
-        [Display(Name = "Data de nascimento")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm}", ApplyFormatInEditMode = true)]
         public DateTime? DataNascimento { get; set; }
-
-        [Display(Name = "Telefone fixo")]
         public string Telefonefixo { get; set; }
-
-        [Display(Name = "Celular")]
         public string TelefoneCelular { get; set; }
         public string Logradouro { get; set; }
         public string Bairro { get; set; }
@@ -47,5 +57,11 @@ namespace Pastelaria.Domain.Usuario.Dto
         public string Uf { get; set; }
         public string Cep { get; set; }
         public string Foto { get; set; }
+        //public IReadOnlyCollection<TarefaDto> tarefa { get { return _tarefaDtos.ToArray(); } }
+
+        //public void AddTarefa(TarefaDto tarefaDto)
+        //{
+        //    _tarefaDtos.Add(tarefaDto);
+        //}
     }
 }

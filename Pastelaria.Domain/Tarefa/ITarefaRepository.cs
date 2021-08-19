@@ -12,6 +12,7 @@ namespace Pastelaria.Domain.Tarefa
         int Post(TarefaDto tarefa);
         void PutDataExecucao(int id);
         TarefaDto GetTarefaPorId(int id);
-
+        void Delete(int id);
+        void PutSituacaoPorID(int idTarefa, string situacao);
     }
 }

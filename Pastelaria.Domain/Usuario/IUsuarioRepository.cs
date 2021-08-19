@@ -13,5 +13,6 @@ namespace Pastelaria.Domain.Usuario
         UsuarioDto GetUsuarioPorId(int idUsuario);
         void Post(UsuarioDto usuario);
         UsuarioDto GetUsuarioPorEmail(string email);
+        void Delete(int id);
     }
 }
