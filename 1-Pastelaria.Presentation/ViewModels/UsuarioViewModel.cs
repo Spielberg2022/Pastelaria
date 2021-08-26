@@ -1,12 +1,11 @@
-﻿using Pastelaria.Domain.Tarefa.Dto;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace _4_Pastelaria.Api.Models
+namespace _1_Pastelaria.Presentation.ViewModels
 {
-    public class UsuarioModel
+    public class UsuarioViewModel
     {
         public int Id { get; set; }
         public int CodigoTipoUsuario { get; set; }
@@ -22,7 +21,5 @@ namespace _4_Pastelaria.Api.Models
         public string Uf { get; set; }
         public string Cep { get; set; }
         public string Foto { get; set; }
-        public IEnumerable<TarefaDto> Tarefas { get ;  set; }
-
     }
 }

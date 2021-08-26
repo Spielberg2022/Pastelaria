@@ -1,14 +1,15 @@
-﻿var home = (function () {
+﻿var tarefas = (function () {
     var config = {
         url: {
             post: '',
-            get: '',
             getTarefas: ''
         }
     };
 
     var init = function ($config) {
         config = $config;
+        getGrid();
+
     }
 
     var post = function () {
@@ -24,18 +25,18 @@
         });
     };
 
-    //var getGrid = function () {
-    //    debugger;
-    //    $.get(config.url.get).success(function (data) {
-    //        alert(data);
-    //        $("#grid").html(data);
-    //    }).error(function (xhr) {
-    //        alert(xhr.responseText);
-    //    });
-    //};
+    var getGrid = function () {
+        debugger;
+        $.get(config.url.getTarefas).done(function (data) {
+            $("#divGrid").html(data);
+        }).fail(function (xhr) {
+            alert(xhr.responseText);
+        });
+    };
 
     return {
         init: init,
-        post: post
+        post: post,
+        getGrid: getGrid
     };
 })();

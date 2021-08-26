@@ -10,7 +10,7 @@ namespace Pastelaria.Domain.Usuario.Dto
 {
     public class UsuarioDto
     {
-        private IList<TarefaDto> _tarefaDtos;
+        //private IList<TarefaDto> _tarefaDtos;
         //public UsuarioDto(int id, 
         //                    int codigoTipoUsuario, 
         //                    string email, 
@@ -57,7 +57,7 @@ namespace Pastelaria.Domain.Usuario.Dto
         public string Uf { get; set; }
         public string Cep { get; set; }
         public string Foto { get; set; }
-        //public IReadOnlyCollection<TarefaDto> tarefa { get { return _tarefaDtos.ToArray(); } }
+        public IEnumerable<TarefaDto> Tarefas { get; set; }
 
         //public void AddTarefa(TarefaDto tarefaDto)
         //{

@@ -1,0 +1,37 @@
+﻿@model IEnumerable<_2_Pastelaria.Application.Model.UsuarioModel>
+@{
+    ViewBag.Title = "CriarTarefas";
+    Layout = null;
+}
+
+<form>
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Id Usuario:</label>
+        <select class="custom-select">
+            <option selected>Selecione o usuário</option>
+            @if (Model.Any())
+            {
+                foreach (var usuario in Model)
+                {
+                    <option value="@usuario.Id">@usuario.Nome</option>
+                }
+            }
+            else
+            {
+                <option value="0">Nenhum usuário cadastrado...</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput">Assunto:</label>
+        <input type="text" class="form-control" id="assuntoInput" placeholder="Assunto aqui.">
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Descrição:</label>
+        <textarea class="form-control" id="tarefaDescricaoTextArea" rows="3" placeholder="Descrição da tarefa a ser executada aqui."></textarea>
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Data Limite de Execução: </label>
+        <input type="date" class="form-control" id="dataLimiteExecucaoInput">
+    </div>
+</form>

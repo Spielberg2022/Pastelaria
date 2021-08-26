@@ -12,5 +12,6 @@ namespace _6_Pastelaria.Services
         string Post(TarefaDto tarefaDto);
         void PutDataExecucao(int id);
         void Delete(int id);
+        void PutTarefaPorId(int id, string tarefaDescricao, DateTime dataLimiteExecucao);
     }
 }

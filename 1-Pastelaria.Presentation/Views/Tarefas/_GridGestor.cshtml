@@ -1,0 +1,47 @@
+﻿@model IEnumerable<_2_Pastelaria.Application.Tarefa.Model.TarefaModel>
+
+@{
+    ViewBag.Title = "ListaTarefas";
+    Layout = null;
+}
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Id Usuario</th>
+            <th scope="col">Descricao</th>
+            <th scope="col">Agendamento</th>
+            <th scope="col">Data Limite</th>
+            <th scope="col">Data Execução</th>
+            <th scope="col">Situação</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            foreach (var tarefa in Model)
+            {
+                <tr>
+                    <td>@tarefa.Id</td>
+                    <td>@tarefa.IdUsuario</td>
+                    <td>@tarefa.TarefaDescricao</td>
+                    <td>@tarefa.DataAgendamento</td>
+                    <td>@tarefa.DataLimiteExecucao</td>
+                    <td>@tarefa.DataExecucaoFormatada</td>
+                    <td>@tarefa.Situacao</td>
+                    <td>
+                        <button type="button" class="btn btn-secondary btn-sm">Editar</button>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7"> Nenhum registro encontrado...</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<button type="button" class="btn btn-primary btn-sm">Criar Tarefa</button>

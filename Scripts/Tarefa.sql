@@ -6,7 +6,6 @@ CREATE PROCEDURE [dbo].[PSP_InsTarefa]
 	@IdGestor int,
 	@IdUsuario int,
 	@TarefaDescricao varchar(200) = null,
-	@DataAgendamento date = null,
 	@DataLimiteExecucao date = null,
 	@DataExecucao date = null,
 	@Situacao varchar(20)
@@ -25,50 +24,13 @@ CREATE PROCEDURE [dbo].[PSP_InsTarefa]
 	BEGIN;
 
 		INSERT INTO [dbo].[Tarefa] (IdGestor, IdUsuario, TarefaDescricao, DataAgendamento, DataLimiteExecucao, DataExecucao, Situacao)
-			VALUES(@IdGestor,@IdUsuario,@TarefaDescricao,@DataAgendamento,@DataLimiteExecucao,@DataExecucao, @Situacao)
+			VALUES(@IdGestor,@IdUsuario,@TarefaDescricao,Convert(date,SYSDATETIME()),@DataLimiteExecucao,@DataExecucao, @Situacao)
 
 		RETURN SCOPE_IDENTITY()
 
 	END;
 GO
-
-
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[PSP_SelTarefaPorUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[PSP_SelTarefaPorUsuario]
-GO
-
-CREATE PROCEDURE [dbo].[PSP_SelTarefaPorUsuario]
-	@IdUsuario int
-	AS
-
-	/*
-	Documentacao
-	Arquivo Fonte.....: Tarefa.sql
-	Objetivo..........: Busca todas as tarefas de um usuário informado
-	Autor.............: SMN - Wesley Silveira
- 	Data..............: 08/07/2021
-	Ex................: EXEC [dbo].[PSP_SelTarefaPorUsuario]
-
-	*/
-
-	BEGIN;
-
-		-- nolock em todas tabelas da proc
-		SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
-
-		SELECT Id, 
-				IdGestor, 
-				IdUsuario, 
-				TarefaDescricao, 
-				DataAgendamento, 
-				DataLimiteExecucao, 
-				DataExecucao
-			FROM [dbo].[Tarefa]
-			WHERE IdUsuario = @IdUsuario
-
-	END;
-GO
-				
+			
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[PSP_SelTarefaPorId]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[PSP_SelTarefaPorId]
@@ -195,3 +157,105 @@ CREATE PROCEDURE [dbo].[PSP_DeleteTarefaPorId]
 	END;
 GO
 				
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[PSP_UPDTarefaPorId]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[PSP_UPDTarefaPorId]
+GO
+
+CREATE PROCEDURE [dbo].[PSP_UPDTarefaPorId]
+	@TarefaDescricao varchar(200) = null,
+	@DataLimiteExecucao date = null,
+	@Id int
+	AS
+
+	/*
+	Documentacao
+	Arquivo Fonte.....: Tarefa.sql
+	Objetivo..........: Atualiza as informações da tarefa de acordo com o Id informado
+	Autor.............: SMN - Wesley Silveira
+ 	Data..............: 20/08/2021
+	Ex................: EXEC [dbo].[PSP_UPDTarefaPorId]
+
+	*/
+
+	BEGIN;
+
+		UPDATE [dbo].[Tarefa]
+			SET TarefaDescricao = @TarefaDescricao, DataLimiteExecucao = @DataLimiteExecucao
+			WHERE Id = @Id
+
+	END;
+GO
+			
+CREATE PROCEDURE [dbo].[PSP_SelTarefasUsuario]
+	@IdUsuario int
+	AS
+
+	/*
+	Documentacao
+	Arquivo Fonte.....: Tarefa.sql
+	Objetivo..........: Busca todas as tarefas de um usuário informado
+	Autor.............: SMN - Wesley Silveira
+ 	Data..............: 08/07/2021
+	Ex................: EXEC [dbo].[PSP_SelTarefasUsuario]
+
+	*/
+
+	BEGIN;
+
+		-- nolock em todas tabelas da proc
+		SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+
+		SELECT Id, 
+				IdGestor, 
+				IdUsuario, 
+				TarefaDescricao, 
+				DataAgendamento, 
+				DataLimiteExecucao, 
+				DataExecucao,
+				Situacao
+			FROM [dbo].[Tarefa]
+			WHERE IdUsuario = @IdUsuario
+			ORDER BY DataAgendamento DESC
+
+	END;
+GO
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[PSP_SelTarefasUsuarioPorIdGestor]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].PSP_SelTarefasUsuarioPorIdGestor
+GO
+
+CREATE PROCEDURE [dbo].PSP_SelTarefasUsuarioPorIdGestor
+@IdGestor int
+	AS
+
+	/*
+	Documentacao
+	Arquivo Fonte.....: Tarefa.sql
+	Objetivo..........: Busca todas as tarefas de um gestor informado
+	Autor.............: SMN - Wesley Silveira
+ 	Data..............: 26/08/2021
+	Ex................: EXEC [dbo].[PSP_SelTarefasUsuarioPorIdGestor]
+
+	*/
+
+	BEGIN;
+
+		-- nolock em todas tabelas da proc
+		SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+
+		SELECT Id, 
+				IdGestor, 
+				IdUsuario, 
+				TarefaDescricao, 
+				DataAgendamento, 
+				DataLimiteExecucao, 
+				DataExecucao,
+				Situacao
+			FROM [dbo].[Tarefa]
+			WHERE IdGestor = @IdGestor
+			ORDER BY DataAgendamento DESC
+
+	END;
+GO

@@ -11,7 +11,7 @@ namespace _2_Pastelaria.Application
         }
         public HttpResponseMessage Get() => _httpClient.GetAsync("Get").Result;
 
-        public HttpResponseMessage Post(UsuarioModel usuario) => _httpClient.PostAsJsonAsync("Post", usuario).Result;
+        public HttpResponseMessage Post(UsuarioModel usuario) => _httpClient.PostAsJsonAsync("PostLogin", usuario).Result;
 
     }
 

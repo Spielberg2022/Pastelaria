@@ -61,6 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infra\BaseApplication.cs" />
+    <Compile Include="Tarefa\Model\TarefaModel.cs" />
+    <Compile Include="Tarefa\TarefaApplication.cs" />
     <Compile Include="Usuario\Model\UsuarioModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Usuario\UsuarioApplication.cs" />

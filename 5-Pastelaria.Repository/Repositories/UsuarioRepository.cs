@@ -1,4 +1,5 @@
-﻿using Pastelaria.Domain.Usuario;
+﻿using Pastelaria.Domain.Tarefa.Dto;
+using Pastelaria.Domain.Usuario;
 using Pastelaria.Domain.Usuario.Dto;
 using ProjetoBanco.Infra.Data.Repositories;
 using System;
@@ -22,7 +23,8 @@ namespace _5_Pastelaria.Repository
             PSP_SelUsuarioPorEmail,
             PSP_SelEmailUsuarioPorId,
             PSP_SelUsuarioPorId,
-            PSP_DeleteUsuarioPorId
+            PSP_DeleteUsuarioPorId,
+            PSP_SelTarefasUsuario
         }
 
         public UsuarioDto GetLogin(string email, string senha)
@@ -50,7 +52,8 @@ namespace _5_Pastelaria.Repository
                         Id = int.Parse(r["Id"].ToString()),
                         Nome = r["Nome"].ToString(),
                         Email = r["Email"].ToString(),
-                        Senha = r["Senha"].ToString()
+                        CodigoTipoUsuario = int.Parse(r["CodigoTipoUsuario"].ToString())
+                        //Senha = r["Senha"].ToString()
                     };
                 }
             }

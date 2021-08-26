@@ -35,7 +35,7 @@ namespace _6_Pastelaria.Services.Services
 
             var idTarefa = _tarefaRepository.Post(tarefaDto);
 
-            var retorno = _disparoEmailService.Post(new Pastelaria.Domain.DisparoEmail.Dto.DisparoEmailDto
+            var retorno = _disparoEmailService.Post(new DisparoEmailDto
             {
                 IdTarefa = idTarefa,
                 IdUsuarioDestinatario = tarefaDto.IdUsuario,
@@ -88,6 +88,24 @@ namespace _6_Pastelaria.Services.Services
                 CodigoTipoEmail = 3,
                 Assunto = "Tarefa cancelada",
                 Mensagem = "Tarefa Id: '"+ tarefa.Id + "' Descrição: Sua tarefa não precisa mais ser efetuada. TAREFA CANCELADA.'",
+                Email = usuario.Email
+            });
+        }
+
+        public void PutTarefaPorId(int id, string tarefaDescricao, DateTime dataLimiteExecucao)
+        {
+            var tarefa = _tarefaRepository.GetTarefaPorId(id);
+            var usuario = _usuarioRepository.GetUsuarioPorId(tarefa.IdUsuario);
+
+            _tarefaRepository.PutTarefaPorId(id, tarefaDescricao, dataLimiteExecucao);
+
+            _disparoEmailRepository.Post(new DisparoEmailDto
+            {
+                IdTarefa = tarefa.Id,
+                IdUsuarioDestinatario = tarefa.IdUsuario,
+                CodigoTipoEmail = 1,
+                Assunto = "Tarefa alterada",
+                Mensagem = "Tarefa Id: '" + id + "' Descrição: '" + tarefaDescricao + " Tarefa expira em: " + dataLimiteExecucao,
                 Email = usuario.Email
             });
         }

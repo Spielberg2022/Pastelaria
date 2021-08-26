@@ -1,4 +1,5 @@
-﻿using Pastelaria.Domain.Usuario.Dto;
+﻿using Pastelaria.Domain.Tarefa.Dto;
+using Pastelaria.Domain.Usuario.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;

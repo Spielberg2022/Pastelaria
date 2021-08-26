@@ -1,0 +1,12 @@
+﻿<div id="divGrid">    </div>
+<div id="divForm">    </div>
+<script src="~/Lib/Tarefas.js"></script>
+<script>
+    tarefas.init({
+        url: {
+            post: '@Url.Action("Post")',
+            getTarefas: '@Url.Action("GetAll")'
+        }
+    });
+</script>
+

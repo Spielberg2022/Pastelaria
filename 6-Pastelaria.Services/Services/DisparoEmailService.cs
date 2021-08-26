@@ -52,7 +52,7 @@ namespace Pastelaria.Services.Services
             catch (Exception ex)
             {
                 _tarefaRepository.Delete(disparoEmailDto.IdTarefa);
-                return "Erro ao enviar e-mail, a tarefa foi cancelada(excluída)!/n" + ex.Message;
+                return "Erro ao enviar e-mail, a tarefa foi cancelada(excluída)! " + ex.Message;
             }
 
             return string.Empty;

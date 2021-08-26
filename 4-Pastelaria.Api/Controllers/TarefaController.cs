@@ -29,6 +29,7 @@ namespace _4_Pastelaria.Api.Controllers
         /// </summary>
         /// <param name="id">Id da tarefa a ser retornada</param>
         /// <returns>Se id existe retona os dados da tarefa</returns>
+        [HttpGet, Route("selecionar-tarefa/{id}")]
         public IHttpActionResult GetTarefaPorId(int id)
         {
             try
@@ -47,6 +48,7 @@ namespace _4_Pastelaria.Api.Controllers
         /// </summary>n
         /// <param name="tarefaDto">Parametros com os dados da tarefa</param>
         /// <returns>Se a inserção for bem sucedida retorna um status ok</returns>
+        [HttpPost,Route("tarefa/")]
         public IHttpActionResult Post(TarefaDto tarefaDto)
         {
             try
@@ -92,6 +94,48 @@ namespace _4_Pastelaria.Api.Controllers
             catch (Exception ex)
             {
                 return BadRequest("Falha ao finalizar tarefa!" + ex.Message);
+            }
+        }
+
+        [HttpPut, Route("atualizar-tarefa/")]
+        public IHttpActionResult PutTarefaPorId(int id, string tarefaDescricao, DateTime dataLimiteExecucao)
+        {
+            try
+            {
+                _tarefaService.PutTarefaPorId(id, tarefaDescricao, dataLimiteExecucao);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Falha ao atualizar tarefa!" + ex.Message);
+            }
+        }
+
+        [HttpGet, Route("selecionar-tarefas/{idUsuario}")]
+        public IHttpActionResult GetTarefas(int idUsuario)
+        {
+            try
+            {
+                var tarefas = _tarefaRepository.GetTarefas(idUsuario);
+                return Ok(tarefas);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Falha ao retornar tarefa!" + ex.Message);
+            }
+        }
+
+        [HttpGet, Route("selecionar-tarefas-gestor/{idGestor}")]
+        public IHttpActionResult GetTarefasPorIdGestor(int idGestor)
+        {
+            try
+            {
+                var tarefas = _tarefaRepository.GetTarefasPorIdGestor(idGestor);
+                return Ok(tarefas);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Falha ao retornar tarefa!" + ex.Message);
             }
         }
     }

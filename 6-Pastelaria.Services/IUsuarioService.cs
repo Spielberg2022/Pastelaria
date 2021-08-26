@@ -11,5 +11,6 @@ namespace _6_Pastelaria.Services
     {
         string Post(UsuarioDto usuarioDto);
         string Delete(int idUsuario);
+        UsuarioDto PostLogin(UsuarioDto usuario);
     }
 }

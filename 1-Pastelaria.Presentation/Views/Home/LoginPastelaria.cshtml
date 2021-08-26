@@ -46,35 +46,21 @@
     </style>
 </head>
 <body>
-    <form onsubmit="home.post(this); return false;" id="form">
+    <form id="form">
         <div class="tela-login">
             <h1>Login</h1>
-            <input type="text" placeholder="E-mail" id="email" required />
+            <input type="text" placeholder="E-mail" id="email" name="Email" required />
             <br /> <br />
-            <input type="password" placeholder="Senha" id="senha" required />
+            <input type="password" placeholder="Senha" id="senha" name="Senha" required />
             <br /> <br />
-            <button id="btnEnviar" type="submit">Enviar</button>
+            <button id="btnEnviar" type="button" onclick="home.post();" >Enviar</button>
         </div>
     </form>
-    <script src="~/Lib/Home.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     <script src="~/Scripts/plugins.js"></script>
+    <script src="~/Lib/Home.js"></script>
     <script>
-        @*var url = {
-            get: '@Url.Action("Get", "Usuario")',
-            getUsuario : ''
-        };
-
-        $("#btnEnviar").click(function () {
-            debugger;
-            $.get(url.get,
-                {
-                    email: $("#email").val(),
-                    senha: $("#senha").val()
-                }, function (data) {
-            });
-        });*@
         home.init({
             url: {
                 post: '@Url.Action("Post")',

@@ -1,5 +1,6 @@
 ﻿using Pastelaria.Domain.Tarefa;
 using Pastelaria.Domain.Tarefa.Dto;
+using Pastelaria.Domain.Usuario.Dto;
 using ProjetoBanco.Infra.Data.Repositories;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,10 @@ namespace _5_Pastelaria.Repository.Repositories
             PSP_SelTarefaPorId,
             PSP_UpdDataExecucaoTarefa,
             PSP_DeleteTarefaPorId,
-            PSP_UpdSituacaoTarefa
+            PSP_UpdSituacaoTarefa,
+            PSP_UPDTarefaPorId,
+            PSP_SelTarefasUsuario,
+            PSP_SelTarefasUsuarioPorIdGestor
         }
 
         public int Post(TarefaDto tarefa)
@@ -34,7 +38,7 @@ namespace _5_Pastelaria.Repository.Repositories
             _conexao.AddParameter("@IdGestor", tarefa.IdGestor);
             _conexao.AddParameter("@IdUsuario", tarefa.IdUsuario);
             _conexao.AddParameter("@TarefaDescricao", tarefa.TarefaDescricao);
-            _conexao.AddParameter("@DataAgendamento", tarefa.DataAgendamento);
+            //_conexao.AddParameter("@DataAgendamento", tarefa.DataAgendamento);
             _conexao.AddParameter("@DataLimiteExecucao", tarefa.DataLimiteExecucao);
             _conexao.AddParameter("@DataExecucao", tarefa.DataExecucao);
             _conexao.AddParameter("@Situacao", tarefa.Situacao);
@@ -57,26 +61,18 @@ namespace _5_Pastelaria.Repository.Repositories
             {
                 if (r.Read())
                 {
-                    DateTime dataExecucao;
-                    try
-                    {
-                        dataExecucao = Convert.ToDateTime(r["DataExecucao"]?.ToString());
-                    }
-                    catch (Exception)
-                    {
-                        dataExecucao = Convert.ToDateTime("1900-01-01");
-                    }
-
-                    TarefaDto tarefa = new TarefaDto(int.Parse(r["Id"].ToString()), 
-                                                        int.Parse(r["IdGestor"].ToString()), 
-                                                        int.Parse(r["IdUsuario"].ToString()), 
-                                                        r["TarefaDescricao"].ToString(),
-                                                        DateTime.Parse(r["DataAgendamento"].ToString()), 
-                                                        DateTime.Parse(r["DataLimiteExecucao"].ToString()),
-                                                        dataExecucao,
-                                                        "",
-                                                        "",
-                                                        r["Situacao"].ToString());
+                    var tarefa = new TarefaDto {
+                        Id = int.Parse(r["Id"].ToString()),
+                        IdGestor = int.Parse(r["IdGestor"].ToString()),
+                        IdUsuario = int.Parse(r["IdUsuario"].ToString()),
+                        TarefaDescricao = r["TarefaDescricao"].ToString(),
+                        DataAgendamento = DateTime.Parse(r["DataAgendamento"].ToString()),
+                        DataLimiteExecucao = DateTime.Parse(r["DataLimiteExecucao"].ToString()),
+                        DataExecucao = string.IsNullOrEmpty(r["DataExecucao"]?.ToString()) ? new DateTime() : DateTime.Parse(r["DataExecucao"].ToString()),
+                        Assunto = "",
+                        Mensagem = "",
+                        Situacao = r["Situacao"].ToString()
+                        };
 
                     return tarefa;
                 }
@@ -97,6 +93,66 @@ namespace _5_Pastelaria.Repository.Repositories
             _conexao.AddParameter("@Id", idTarefa);
             _conexao.AddParameter("@Situacao", situacao);
             _conexao.ExecuteNonQuery();
+        
+        }
+
+        public void PutTarefaPorId(int id, string tarefaDescricao, DateTime dataLimiteExecucao)
+        {
+            _conexao.ExecuteProcedure(Procedures.PSP_UPDTarefaPorId);
+            _conexao.AddParameter("@Id", id);
+            _conexao.AddParameter("@TarefaDescricao", tarefaDescricao);
+            _conexao.AddParameter("@DataLimiteExecucao", dataLimiteExecucao);
+            _conexao.ExecuteNonQuery();
+        }
+
+        public IEnumerable<TarefaDto> GetTarefas(int idUsuario)
+        {
+            var tarefas = new List<TarefaDto>();
+            _conexao.ExecuteProcedure(Procedures.PSP_SelTarefasUsuario);
+            _conexao.AddParameter("@IdUsuario", idUsuario);
+            using (var r = _conexao.ExecuteReader())
+                while (r.Read())
+                {
+                    var tarefa = new TarefaDto
+                    {
+                        Id = int.Parse(r["Id"].ToString()),
+                        IdGestor = int.Parse(r["IdGestor"].ToString()),
+                        IdUsuario = int.Parse(r["IdUsuario"].ToString()),
+                        TarefaDescricao = r["TarefaDescricao"].ToString(),
+                        DataAgendamento = DateTime.Parse(r["DataAgendamento"].ToString()),
+                        DataLimiteExecucao = DateTime.Parse(r["DataLimiteExecucao"].ToString()),
+                        DataExecucao = string.IsNullOrEmpty(r["DataExecucao"]?.ToString()) ? new DateTime() : DateTime.Parse(r["DataExecucao"].ToString()),
+                        Situacao = r["Situacao"].ToString()
+                    };
+
+                    tarefas.Add(tarefa);
+                }
+            return tarefas;
+        }
+
+        public IEnumerable<TarefaDto> GetTarefasPorIdGestor(int idGestor)
+        {
+            var tarefas = new List<TarefaDto>();
+            _conexao.ExecuteProcedure(Procedures.PSP_SelTarefasUsuarioPorIdGestor);
+            _conexao.AddParameter("@IdGestor", idGestor);
+            using (var r = _conexao.ExecuteReader())
+                while (r.Read())
+                {
+                    var tarefa = new TarefaDto
+                    {
+                        Id = int.Parse(r["Id"].ToString()),
+                        IdGestor = int.Parse(r["IdGestor"].ToString()),
+                        IdUsuario = int.Parse(r["IdUsuario"].ToString()),
+                        TarefaDescricao = r["TarefaDescricao"].ToString(),
+                        DataAgendamento = DateTime.Parse(r["DataAgendamento"].ToString()),
+                        DataLimiteExecucao = DateTime.Parse(r["DataLimiteExecucao"].ToString()),
+                        DataExecucao = string.IsNullOrEmpty(r["DataExecucao"]?.ToString()) ? new DateTime() : DateTime.Parse(r["DataExecucao"].ToString()),
+                        Situacao = r["Situacao"].ToString()
+                    };
+
+                    tarefas.Add(tarefa);
+                }
+            return tarefas;
         }
     }
 }

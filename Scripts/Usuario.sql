@@ -34,6 +34,9 @@ CREATE PROCEDURE [dbo].[PSP_SelUsuarioPorEmaileSenha]
 	END;
 GO
 
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[PSP_SelTarefasUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[PSP_SelTarefasUsuario]
+GO
 
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[PSP_InsUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)

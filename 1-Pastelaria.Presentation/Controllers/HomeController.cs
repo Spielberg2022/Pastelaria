@@ -1,6 +1,7 @@
 ﻿using _1_Pastelaria.Presentation.Infra;
 using _2_Pastelaria.Application;
 using _2_Pastelaria.Application.Model;
+using System.Net.Http;
 using System.Web.Mvc;
 
 namespace _1_Pastelaria.Presentation.Controllers
@@ -24,6 +25,10 @@ namespace _1_Pastelaria.Presentation.Controllers
             var response = _usuarioApplication.Post(usuario);
             if (!response.IsSuccessStatusCode)
                 return Error(response.Content.ReadAsStringAsync().Result);
+
+            Session["Usuario"] = response.Content.ReadAsAsync<UsuarioModel>().Result;
+
+            var usuarioLogado = (UsuarioModel)Session["Usuario"];
 
             return Success();
         }

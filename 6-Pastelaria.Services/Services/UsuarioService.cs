@@ -1,5 +1,6 @@
 ﻿using _5_Pastelaria.Repository;
 using _6_Pastelaria.Services;
+using Pastelaria.Domain.Tarefa;
 using Pastelaria.Domain.Usuario.Dto;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,12 @@ namespace Pastelaria.Domain.Usuario.Services
     public class UsuarioService : IUsuarioService
     {
         private readonly IUsuarioRepository _usuarioRepository;
+        private readonly ITarefaRepository _tarefaRespository;
 
-        public UsuarioService(IUsuarioRepository usuarioRepository)
+        public UsuarioService(IUsuarioRepository usuarioRepository, ITarefaRepository tarefaRepository)
         {
             _usuarioRepository = usuarioRepository;
+            _tarefaRespository = tarefaRepository;
         }
 
         public string Delete(int idUsuario)
@@ -44,6 +47,14 @@ namespace Pastelaria.Domain.Usuario.Services
             _usuarioRepository.Post(usuarioDto);
 
             return string.Empty;
+        }
+
+        public UsuarioDto PostLogin(UsuarioDto usuarioDto)
+        {
+            var usuario = _usuarioRepository.GetLogin(usuarioDto.Email, usuarioDto.Senha);
+            //usuario.Tarefas = _tarefaRespository.GetTarefas(usuario.Id);
+
+            return usuario;
         }
     }
 }
